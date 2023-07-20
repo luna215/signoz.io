@@ -219,7 +219,7 @@ Note that when reporting data to an IP address you’ll either need to configure
 
 For reporting data within your cluster, you can use the DNS name for the collector, which should be [`http://my-release-signoz-otel-collector.platform.svc.cluster.local:4317`](http://my-release-signoz-otel-collector.platform.svc.cluster.local:4317/)
 
-## Part 3 - Kubernetes Infrastructure Metrics
+## Step 3 - Kubernetes Infrastructure Metrics
 
 Along with application metrics, it’s also vital to keep tack of infrastructure statistics for your cluster. The k8s-infra chart was installed along with our SigNoz instance in Step 1, but if you’ve skipped this step or are trying to monitor a second cluster, use 
 
@@ -229,6 +229,10 @@ helm install my-release signoz/k8s-infra  \
 ```
 
 See ‘Addressing data’, above, for populating the endpoint setting.
+
+## Step 4 - Collecting Kubernetes Logs
+
+When you deploy SigNoz to your kubernetes cluster it will start collecting [pod logs](https://kubernetes.io/docs/concepts/cluster-administration/logging/#basic-logging-in-kubernetes). It will automatically parse out attributes from the logs like name, namespace, container name, uid etc. To parse specific attributes from certain kind of logs you can use the different [operators provided by opentelemetry](https://signoz.io/docs/userguide/logs/#operators-for-parsing-and-manipulating-logs). You can filter out selected logs with settings [for the SigNoz collector](https://signoz.io/docs/userguide/collect_kubernetes_pod_logs/#steps-to-filterexclude-logs-collection).
 
 ### Your first K8s infra dasbhoard
 
