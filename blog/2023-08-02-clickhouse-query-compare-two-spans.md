@@ -2,9 +2,9 @@
 title: Measuring the time between spans with a Clickhouse query
 slug: clickhouse-query-compare-two-spans
 date: 2023-08-02
-tags: [OpenTelemetry]
+tags: [OpenTelemetry, Product]
 authors: nicamellifera
-description: Welcome to the 27th edition of our monthly product newsletter - SigNal 27! Our team shipped the much anticipated Trace and Logs Explorer. With the new Trace Explorer page, SigNoz is the most powerful open-source distributed trace product...
+description: Sharing a query that lets you compare the time between two spans in different traces, even across two different services.
 image: /img/blog/2023/08/clickhouse_query_cover-min.jpg
 hide_table_of_contents: true
 keywords:
@@ -17,7 +17,7 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
   <link rel="canonical" href="https://signoz.io/blog/clickhouse-query-compare-two-spans/"/>
 </head>
 
-In a recent conversation on our <a href = "https://signoz.io/docs/community/" rel="noopener noreferrer nofollow" target="_blank" >SigNoz community Slack</a>, a user shared their query that asks a deceptively simple question: **what is the average time between two spans in a trace?**
+In a recent conversation on our <a href = "https://signoz.io/slack" rel="noopener noreferrer nofollow" target="_blank" >SigNoz community Slack</a>, a user shared their query that asks a deceptively simple question: **what is the average time between two spans in a trace?**
 
 The usefulness of this answer is evident if you think about how often the total trace time does not highlight the time you care about most. This could mean any number of things: that the total trace time of handling a web request might include lots of spans *after* a satisfying response was sent to the user. Or the time to handle a critical transaction might happen inside a larger trace.
 
@@ -27,7 +27,7 @@ The usefulness of this answer is evident if you think about how often the total 
 
 While it would be great to report a span with this critical section of time, that’s not always feasible. We don’t all control our codebase to the degree we can add custom markers to our tracer, and it’s possible the two spans in question are on very different services, requiring a ton work to tie them together at execution time.
 
-## The Power of ClickHouse
+## The Power of ClickHouse Queries
 
 Let’s talk about how great Clickhouse has been for SigNoz. Adopted [just over two years ago](https://signoz.io/blog/clickhouse-storage-monitoring/), Clickhouse has enabled blazing speed and simple setup for SigNoz users. Clickhouse also enables queries like this, that aren’t possible in other monitoring tools.
 
@@ -69,9 +69,8 @@ The resulting graph gives us a track of the time between these spans, which may 
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/08/time-gap.webp" alt="image of the SigNoz dashboard"/>
+    <figcaption><i>The resulting timeseries. You could also chart these as a table if you're less interested in the time series and more the total value.</i></figcaption>
 </figure>
-
-*The resulting timeseries. You could also chart these as a table if you're less interested in the time series and more the total value.*
 
 ## Charting non-metric data
 
