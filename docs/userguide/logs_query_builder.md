@@ -99,3 +99,36 @@ Here are a few examples of valid and invalid queries:
     |-------------------------------------------------------------------|-----------------------------------------|
     | OPERATION in ('bcd') AND 'abcd' FULLTEXT contains 'search string' | AND missing between 'abcd' and FULLTEXT | 
     | OPERATION in ('bcd') AND 'search string'                          | Operator missing before 'search string' | 
+
+## The visual query builder
+We recently released an updated logs explorer page and query builder in SigNoz to make experience of our logs product much more intuitive and seamless.
+![](01.webp)
+
+Some of the key features:
+1. Advanced filtering based on attributes and auto suggestions for filters
+
+You can now create more complex queries for how you match attributes, and the query field will automatically suggest both attributes and values for your query
+
+![](02.webp)
+
+After entering your query hit 'run query' to see a default bar chart and results down below
+
+![](03.webp)
+
+To explore additional ways to filter your query, click 'view details' on any log line to get a list of parameters on the log. and click any value to automatically add a `{attribute} IN {value}` to your query
+
+![](04.webp)
+2. Aggregation options like Group By, ability to specificy aggregation intervals, etc.
+The Group By drop down is automatically populated with common attributes, and selecting one, like log level in this example, gets us a few things right away
+
+* A comparitive bar chart, with a legend (you can enter a format for the legend including explanatory text eg in this case you might enter `The log level is {{level}}` to make the chart more readable by others)
+* A timeseries comparing the relative volume of results by time
+
+3. Being able to plot multiple queries and formulae based on them in the same charts
+For comparing two timeseries or values, you can now add multiple queries or formulae on the same chart, which is especially useful if you are comparing similar data across two different services.
+
+
+4. Create Dashboards and Alerts in a single click from logs query builder
+
+Directly from results you can add the query to a dashboard and set up an alert. This makes the timeseries view especially useful, as you can now create an alert when a certain event is logged beyond a certain rate.
+
