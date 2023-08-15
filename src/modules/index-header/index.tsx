@@ -104,7 +104,7 @@ needs - APM, logs, metrics, exceptions, alerts, and dashboards powered by a powe
       id={"demo-video-player"}
     >
       <source
-        src="https://demo-video-1.s3.us-east-2.amazonaws.com/SigNoz-Demo-Sept2-2022.mp4"
+        src="https://demo-video-1.s3.us-east-2.amazonaws.com/SigNozCompleteDemo-5Aug2023-HD1080p.mov"
         type="video/mp4"
       />
       Your browser does not support the video tag.
