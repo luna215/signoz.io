@@ -142,7 +142,6 @@ By clicking into the details of any log line, you can see the attributes for tha
 
 ![Logs Query Builder Interface](../../static/img/docs/query-builder/06.png)
 
-
 5. Create Dashboards and Alerts in a single click from logs query builder
 
 Directly from results you can add the query to a dashboard and set up an alert. This makes the timeseries view especially useful, as you can now create an alert when a certain event is logged beyond a certain rate.
