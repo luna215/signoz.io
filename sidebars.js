@@ -11,10 +11,11 @@ module.exports = {
       link: {
         type: 'generated-index',
         title: 'Install SigNoz',
-        description: 'To install SigNoz, follow the instructions in the sections below.',
+        description: 'To install SigNoz, follow the instructions in the sections below. If you don\'t want to self-host, try SigNoz Cloud.',
         slug: '/install',
       },
       items: [
+        'install/cloud',
         "install/docker-standalone",
         'install/docker-swarm',
         {
