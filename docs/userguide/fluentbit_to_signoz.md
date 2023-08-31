@@ -9,7 +9,7 @@ If you use fluentBit to collect logs in your stack with this tutotrial you will 
 
 At SigNoz we use opentelemetry collector to recieve logs which supports the fluentforward protocol. So you can forward your logs from your fluentBit agent to opentelemetry collector using fluentforward protocol.
 
-### Collect Logs Using FluentD in SigNoz cloud
+### Collect Logs Using FluentBit in SigNoz cloud
   * Add otel collector binary to your VM by following this [guide](https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/).
   * Add fluentforward reciever to your `config.yaml` 
     ```yaml
@@ -65,7 +65,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the flue
     The operations in the above processor will parse the trace_id and span_id from log to opentelemetry log model and remove them from attributes.
 
 
-## Collect Logs Using FluentD in Self-Hosted SigNoz
+## Collect Logs Using FluentBit in Self-Hosted SigNoz
 * Add fluentforward reciever to your `otel-collector-config.yaml` which is present inside `deploy/docker/clickhouse-setup`
     ```yaml
     receivers:
