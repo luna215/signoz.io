@@ -12,7 +12,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the flue
 ### Collect Logs Using FluentD in SigNoz cloud
   * Add otel collector binary to your VM by following this [guide](https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/).
   * Add fluentforward reciever to your `config.yaml` 
-    ```
+    ```yaml
     receivers:
       fluentforward:
         endpoint: 0.0.0.0:24224
@@ -48,7 +48,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the flue
   *  To properly transform your existing log model into opentelemetry [log](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md) model you can use the different processors provided by opentelemetry. [link](./logs.md#processors-available-for-processing-logs)
   
     eg:- 
-    ```
+    ```yaml
     processors:
       logstransform:
         operators:
@@ -67,7 +67,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the flue
 
 ## Collect Logs Using FluentD in Self-Hosted SigNoz
 * Add fluentforward reciever to your `otel-collector-config.yaml` which is present inside `deploy/docker/clickhouse-setup`
-    ```
+    ```yaml
     receivers:
       fluentforward:
         endpoint: 0.0.0.0:24224
@@ -87,7 +87,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the flue
     ```
     Here we are updating the logs pipeline which will collect logs from `fluentforward` and `otlp` receiver, processing it using batch processor and export it to clickhouse.
 * Expose the port in port for otel-collector in `docker-compose.yaml` file present in `deploy/docker/clickhouse-setup`
-  ```
+  ```yaml
   otel-collector:
     ...
     ports:
@@ -112,7 +112,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the flue
 *  To properly transform your existing log model into opentelemetry [log](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md) model you can use the different processors provided by opentelemetry. [link](./logs.md#processors-available-for-processing-logs)
   
     eg:- 
-    ```
+    ```yaml
     processors:
       logstransform:
         operators:
