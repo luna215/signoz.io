@@ -118,7 +118,7 @@ After entering your query hit 'run query' to see a default bar chart and results
 ![Logs Query Builder Interface](../../static/img/docs/query-builder/03.png)
 
 
-To explore additional ways to filter your query, click 'view details' on any log line to get a list of parameters on the log. and click any value to automatically add a `{attribute} IN {value}` to your query
+To explore additional ways to filter your query, click 'view details' on any log line to get a list of parameters on the log, and click any value to automatically add a `{attribute} IN {value}` to your query.
 
 ![Logs Query Builder Interface](../../static/img/docs/query-builder/04.png)
 
