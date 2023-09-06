@@ -113,7 +113,7 @@ You can now create more complex queries for how you match attributes, and the qu
 
 ![Logs Query Builder Interface](../../static/img/docs/query-builder/02.png)
 
-After entering your query hit 'run query' to see a default bar chart and results down below
+After entering your query hit 'run query' to see a default bar chart and results down below:
 
 ![Logs Query Builder Interface](../../static/img/docs/query-builder/03.png)
 
