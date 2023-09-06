@@ -109,7 +109,7 @@ We recently released an updated logs explorer page and query builder in SigNoz t
 Some of the key features:
 1. Advanced filtering based on attributes and auto suggestions for filters
 
-You can now create more complex queries for how you match attributes, and the query field will automatically suggest both attributes and values for your query
+You can now create more complex queries for how you match attributes, and the query field will automatically suggest both attributes and values for your query.
 
 ![Logs Query Builder Interface](../../static/img/docs/query-builder/02.png)
 
