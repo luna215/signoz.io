@@ -137,7 +137,6 @@ module.exports = {
       type: "category",
       items: [
         'userguide/send-metrics',
-        'userguide/send-metrics-cloud',
         'userguide/navigate-user-interface',
       ],
     },
