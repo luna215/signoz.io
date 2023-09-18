@@ -1,5 +1,5 @@
 ---
-title: Is OpenTelemetry a first class citizen in your dashboard? 🤔 Comparing Datadog and New Relic against OpenTelemetry Native tools.
+title: Comparing Datadog and New Relic's support for OpenTelemetry data
 slug: is-opentelemetry-a-first-class-citizen-in-your-dashboard-a-datadog-and-newrelic-comparison
 date: 2023-09-14
 tags: [OpenTelemetry, Python]
@@ -22,19 +22,17 @@ keywords:
 
 OpenTelemetry is the future of Observability, APM, Monitoring, whatever you want to call ‘the process of knowing what our software is doing.’ It’s becoming common knowledge that your time is better spent gaining experience with an open, standardized system for telemetry than closed-source or otherwise proprietary standard. This truth is so universally acknowledged that all the big players in the market have made announcements of how they’re embracing OpenTelemetry. Often these statements mention how ‘open is the future’ et cetera. But how committed are these teams to OpenTelemetry? In this series, we’ll talk about how native OpenTelemetry tools compare to APM products that have adopted OpenTelemetry only partially. In this article, we will explore how, in both New Relic and Datadog, OpenTelemetry data is a ‘second class citizen.’
 <!--truncate-->
-![Cover Image](/img/blog/2023/09/signal-28_cover.webp)
+![Cover Image](/img/blog/2023/09/firstclass-cover.webp)
 
 ## Data: first and second class
 
-For over a decade APM companies have loved to add new and exotic kinds of monitoring data to their dashboards. The disconnect has often come in *where* that data appears. Back when Application Performance Monitoring was so connected to web frameworks that it was often referred to as RPM (Rails Performance Monitoring), only the performance of web requests was displayed front-and-center on the application dashboard, with custom metrics, cache metrics, database metrics, and everything else relegated to a secondary menu, or worse still entirely hidden unless you set up a custom dashboard.
+For over a decade, APM companies have loved to add new and exotic kinds of monitoring data to their dashboards. The disconnect has often come in *where* that data appears. Back when Application Performance Monitoring was so connected to web frameworks that it was often referred to as RPM (Rails Performance Monitoring), only the performance of web requests was displayed front-and-center on the application dashboard, with custom metrics, cache metrics, database metrics, and everything else relegated to a secondary menu, or worse still entirely hidden unless you set up a custom dashboard.
 
 It became standard to discuss as technical debt, the fact that a data type that was beloved by users was still relegated to a backwater in the dashboard. 
 
-Another issue is ease of data ingress: The standard APM data gathered by a SaaS company’s monitoring agent can be very very easy to report, while other types require custom configuration, settings, and tool chains that make it more brittle than the default. 
+Another issue is ease of data ingress: The standard APM data gathered by a SaaS company’s monitoring agent can be very very easy to report, while other types require custom configuration, settings, and tool chains that make it more brittle than the default.
 
 The result is a system that is gently sloped. It guides the user, without them even knowing it, back to the happy path of using the proprietary monitoring information reported by Datadog and New Relic, and away from open source tools.
-
-New Relic: Where OpenTelemetry Hides
 
 ## The Big Gap Between Datadog’s Marketing and their Tools
 
@@ -132,7 +130,7 @@ Our uniquely named `/rolldice` isn't listed. This is also true for proprietary D
 
 ## OpenTelemetry in New Relic
 
-In stark contrast to Datadog, the New Relic team do a great job of documenting a happy path OpenTelemetry data. One route is clearly deprecated, the other clearly documented. And both automatic and manual instrumentation are clearly documented with an example repo that works on the first run (except for one line which, at least for me, [needed to be fixed](https://github.com/newrelic/newrelic-opentelemetry-examples/blob/e2e7b735fba05f53147587867355f5e37ae45fc3/getting-started-guides/python/Uninstrumented/app.py#L6)). I was reporting OTel data to New Relic in less than an hour, a great onboarding experience.
+In stark contrast to Datadog, the New Relic team does a great job of documenting a happy path for OpenTelemetry data. One route is clearly deprecated, while the other clearly documented. And both automatic and manual instrumentation are clearly documented with an example repo that works on the first run (except for one line which, at least for me, [needed to be fixed](https://github.com/newrelic/newrelic-opentelemetry-examples/blob/e2e7b735fba05f53147587867355f5e37ae45fc3/getting-started-guides/python/Uninstrumented/app.py#L6)). I was reporting OTel data to New Relic in less than an hour, a great onboarding experience.
 
 Once data is reporting, the experience again shows significant gaps between OpenTelemetry and proprietary data.
 
@@ -150,7 +148,7 @@ Note that setting the same service name won’t fix the issue: application data,
 
 ### A whole different experience
 
-Clicking into the dashboards for our two applications gives a very different experience for OpenTelemetry. Starting with the New Relic view its users are used to
+Clicking into the dashboards for our two applications gives a very different experience for OpenTelemetry. Starting with the New Relic view its users are used to:
 
 <figure data-zoomable align='center'>
     <img src="/img/blog/2023/09/firsclass-7.webp" alt="a screenshot of new relic services"/>
@@ -170,7 +168,7 @@ Despite these requests being handled by the web framework Flask, the New Relic i
 
 ### Behind the scenes: different data
 
-New relic has a very useful feature to see the query that constructed any chart in the UI. Looking at the queries for even a very basic statistic like ‘throughput’ show the problem: even with a custom query or dashboard, it’s not possible to ‘stitch’ OpenTelemetry data together with proprietary New Relic monitoring.
+New relic has a very useful feature to see the query that behind any chart in the UI. Looking at the queries for even a very basic statistic like ‘throughput’ shows the problem: even with a custom query or dashboard, it’s not possible to ‘stitch’ OpenTelemetry data together with proprietary New Relic monitoring.
 
 Query 1: throughput on a New Relic-instrumented app,
 
@@ -188,17 +186,23 @@ FROM Metric WHERE (entity.guid = 'NDExMjc2NXxFWFR8U0VSVklDRXwtMzM1MzYxNjkxNjU2Mz
 AND ((http.server.duration IS NOT NULL OR rpc.server.duration IS NOT NULL OR messaging.producer.duration IS NOT NULL)) TIMESERIES
 ```
 
-charts like ‘response time’ have even more divergent query formats and labels. The result is that you won’t be able to average between applications and comparison will be difficult. 
+charts like ‘response time’ have even more divergent query formats and labels. The result is that you won’t be able to average between applications and comparison will be difficult.
 
-## Conclusions: The Difficulty of Competing with Native OpenTelemetry Tools
+## Conclusions
+
+### The missing collector
 
 One thing was missing from both these journeys that stands out in retrospect: The OpenTelemetry Collector. While Datadog supports using the Collector with a Datadog exporter, it’s not the featured path on their docs, and neither route offers integration of logs and metrics with traces.
 
-Let’s talk about how New Relic and Datadog stack up:
+One can absolutely support OpenTelemetry without the collector, but it would be nice to see both teams producing some documentation and tutorials for the Collector, as it's a key component of a succesful OpenTelemetry architecture.
+
+### Comparing DataDog and New Relic Support for OpenTelemetry
 
 Perhaps it’s my fondness for the team at New Relic, but my impression is that their attitude to OpenTelemetry as a whole is significantly better: examples are clear, limitations aren’t obfuscated, and examples are recently updated and functional. I’m keenly aware of the massive data management problem of merging two datasets with different schemas, and all the limitations I listed above seem to be a result of that issue.
 
 Over at Datadog, the story inspires even less confidence. The documentation featured on their support site seems calculated to leave the *impression* that OpenTelemetry is fully supported at Datadog just like any other data source, with little concern with how someone might ever actually report OTel data. Almost as if support of OpenTelemetry is fine as a selling point to close a deal, but there’s no plan to encourage users to actually use the standard. Even once data is reporting, we see real limitations once we ‘zoom in’ and try to annotate traces in depth.
+
+### The Difficulty of Competing with OpenTelemetry Native Tools
 
 It’s surprising that two companies with highly mature products, hundreds of thousands of hosts under monitoring, and massive product teams would struggle so much to support OpenTelemetry. While OTel may have a different standard, it is after all data with a familiar purpose: telling users how their software is running. But it’s the gaps with their proprietary data that show the problem: Neither New Relic nor Datadog can devote all their time to OpenTelemetry, they have far too many legacy customers to stop development on their proprietary monitoring and dashboards. Even a small team, if they go ‘all in’ on supporting OpenTelemetry as the sole way to monitor applications, can produce a better experience for engineers than can New Relic or Datadog.
 
