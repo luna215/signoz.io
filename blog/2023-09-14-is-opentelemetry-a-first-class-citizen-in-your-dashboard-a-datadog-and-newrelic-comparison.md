@@ -190,12 +190,6 @@ charts like ‘response time’ have even more divergent query formats and label
 
 ## Conclusions
 
-### The missing collector
-
-One thing was missing from both these journeys that stands out in retrospect: The OpenTelemetry Collector. While Datadog supports using the Collector with a Datadog exporter, it’s not the featured path on their docs, and neither route offers integration of logs and metrics with traces.
-
-One can absolutely support OpenTelemetry without the collector, but it would be nice to see both teams producing some documentation and tutorials for the Collector, as it's a key component of a succesful OpenTelemetry architecture.
-
 ### Comparing DataDog and New Relic Support for OpenTelemetry
 
 Perhaps it’s my fondness for the team at New Relic, but my impression is that their attitude to OpenTelemetry as a whole is significantly better: examples are clear, limitations aren’t obfuscated, and examples are recently updated and functional. I’m keenly aware of the massive data management problem of merging two datasets with different schemas, and all the limitations I listed above seem to be a result of that issue.
