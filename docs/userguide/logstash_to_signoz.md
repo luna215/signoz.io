@@ -11,7 +11,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the TCP 
 
 ### Collect Logs Using Logstash in SigNoz cloud
   * Add otel collector binary to your VM by following this [guide](https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/).
-  * Add fluentforward reciever to your `config.yaml` 
+  * Add the reciever to your `config.yaml` 
     ```yaml
     receivers:
       tcplog/logstash:
@@ -51,7 +51,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the TCP 
 
 ## Collect Logs Using Logstash in Self-Hosted SigNoz
 
-* Add fluentforward reciever to your `otel-collector-config.yaml` which is present inside `deploy/docker/clickhouse-setup`
+* Add the reciever to your `otel-collector-config.yaml` which is present inside `deploy/docker/clickhouse-setup`
     ```yaml
     receivers:
       tcplog/logstash:
