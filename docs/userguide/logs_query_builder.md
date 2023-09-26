@@ -6,9 +6,6 @@ id: logs_query_builder
 # Logs Query Builder 
 We recently released an updated logs explorer page and query builder in SigNoz to make experience of our logs product much more intuitive and seamless.
 
-![Logs Query Builder Interface](../../static/img/docs/query-builder/01.png)
-
-
 Some of the key features:
 1. Advanced filtering based on attributes and auto suggestions for filters<br></br>
 
