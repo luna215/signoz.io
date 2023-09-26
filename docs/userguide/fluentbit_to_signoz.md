@@ -38,7 +38,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the flue
       Port          24224
     ```
     In this config we are forwarding the logs to the otel collector which is listening on  port 24224.
-     Also we are assuming that you are running the fluentD binary on the host. If not, the value of `host` might change depending on your environment. 
+    Also we are assuming that you are running the fluentBit binary on the host. If not, the value of `host` might change depending on your environment. 
   *  Once you make this changes you can restart fluentBit and otel-binary, and you will be able to see the logs in SigNoz.
   *  To properly transform your existing log model into opentelemetry [log](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md) model you can use the different processors provided by opentelemetry. [link](./logs.md#processors-available-for-processing-logs)
   
