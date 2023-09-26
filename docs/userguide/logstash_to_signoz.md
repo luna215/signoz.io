@@ -22,7 +22,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the TCP 
         add_attributes: false
         operators: []
     ```
-    Here we have used port 2255 for listing in TCP protocol, but you can change it to a port you want.
+    Here we have used port 2255 for listening in TCP protocol, but you can change it to a port you want.
     You can read more about tcplog reciver [here](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/tcplogreceiver).
  * Modify your `config.yaml` and add the above receiver
     ```yaml {4}
@@ -44,7 +44,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the TCP 
     }
     ```
     Here we are configuring logstash to send logs to otel-collector that we ran in the previous step, which is listening on port 2255.
-    Also we are assuming that you are running the logstash binary on the host. If not the value of `host` might change depending on your environment. 
+    Also we are assuming that you are running the logstash binary on the host. If not, the value of `host` might change depending on your environment. 
 
   *  Once you make this changes you can otel binary and logstash, and you will be able to see the logs in SigNoz.
   *  To properly transform your existing log model into opentelemetry [log](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/logs/data-model.md) model you can use the different processors provided by opentelemetry [link](./logs.md#processors-available-for-processing-logs).
@@ -62,7 +62,7 @@ At SigNoz we use opentelemetry collector to recieve logs which supports the TCP 
         add_attributes: false
         operators: []
     ```
-    Here we have used port 2255 for listing in TCP protocol, but you can change it to a port you want.
+    Here we have used port 2255 for listening in TCP protocol, but you can change it to a port you want.
     You can read more about tcplog reciver [here](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/tcplogreceiver).
 
 * Update the pipleline for logs and make the following change in `otel-collector-config.yaml`
