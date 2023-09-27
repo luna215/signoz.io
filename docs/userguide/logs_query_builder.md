@@ -37,7 +37,7 @@ Some of the key features:
 
 4. Modify your query with a click<br></br>
 
-    By clicking into the details of any log line, you can see the attributes for that item. Click any value, and your query will be modified to require that attribute and value.
+    By clicking on the details of any log line, you can see the attributes for that item. Click any value, and your query will be modified to require that attribute and value.
 
     ![Logs Query Builder Interface](../../static/img/docs/query-builder/06.png)
 
@@ -52,13 +52,13 @@ With the alert query you can perform sophisticated comparisons or other math on 
 
 ## Writing JSON Filters In The New Logs Explorer
 
-In the new logs explorer you can query youe json data present inside the body. Json data in body will be rendered like this
+In the new logs explorer, you can query your JSON data present inside the body. JSON data in the body will be rendered like this:
 ![JSON Data in log body](../../static/img/logs/json_log.png)
 
 You can click on one of the keys and then filter them out
 ![JSON Data filter](../../static/img/logs/json_log_filter.png)
 
-If you want to write the query on your then you can follow the following rules.
+If you want to write the query on your own in the filter bar then you can follow the following rules.
 
 * For json query inside body it starts with a prefix `body.`
 * To access a value of a key you can use the notation `body.key_name`
@@ -67,7 +67,7 @@ If you want to write the query on your then you can follow the following rules.
 * operators supported for arrays are `HAS` and `NHAS`
 
 
-### Example for json filter
+### Example for JSON filter
 
 Lets say we have this example data in your json log body
 ```json
@@ -121,7 +121,7 @@ Lets say we have this example data in your json log body
 
 # Logs Query Builder in old Logs Explorer
 
-This page will walk you through the query language that is used by SigNoz for filtering logs in the old logs explorer.
+This section will walk you through the query language that is used by SigNoz for filtering logs in the old logs explorer.
 
 This query language for logs is a simplified version of SQL. The current state of the query language is good enough for daily uses. As of now we don't support nesting and parenthesis for explicit ordering due to added complexity. 
 
@@ -174,9 +174,9 @@ Note:- The `fulltext` keyword can be only used with `contains` and the `ncontain
     eg:-
     If you want to search for logs with stream error and which contains Mozilla in body, the corresponding query on the ui will be 
 
-    `id IN ('2DCVZOsKHioCeuvbObzVzzL1eZ5') AND fulltext contains 'Dispatch Successful'`
+    `stream IN ('stderr') AND fulltext contains 'Mozilla'`
 
-    as we can see `Dispatch Successful` is enclosed in single quotes as well as the Id.
+    as we can see `Mozilla` is enclosed in single quotes as well as `stderr`.
 
 - Order of execution is similar to sql i.e left to right and `and` has higher precedence over `or` , but currently SigNoz doesn’t support combining explicitly using parenthesis.
     
