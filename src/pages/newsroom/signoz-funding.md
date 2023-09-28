@@ -1,12 +1,12 @@
 ---
-title: We’ve raised $6.5M to bring open source observability, natively based on opentelemetry to companies
+title: We’ve raised $6.5M to build the future of open source observability
 slug: signoz-funding
 date: 2023-09-28
 tags: [OpenTelemetry, SigNoz]
-authors: pranay
+authors: [pranay]
 description: SigNoz Fundraise
-image: /img/blog/2023/09/grafana-alternatives-cover.jpeg
-hide_table_of_contents: false
+image: /img/blog/2023/09/Hero-Image.webp
+hide_table_of_contents: true
 keywords:
   - funding
   - signoz
@@ -17,8 +17,27 @@ keywords:
   <link rel="canonical" href="https://signoz.io/blog/signoz-funding/"/>
 </head>
 
-import GetStartedSigNoz from '../docs/shared/get-started-signoz.md';
+<div className='announcementContainer'>
 
+# We’ve raised $6.5M to build the future of open source observability
+
+<div class="avatar">
+  <a
+    class="avatar__photo-link avatar__photo avatar__photo--lg"
+    href="https://twitter.com/pranay01">
+    <img
+      alt="Pranay Profile"
+      src="/img/authors/pranay_profile_pic.webp" />
+  </a>
+  <div class="avatar__intro">
+    <div class="avatar__name">Pranay Prateek</div>
+    <small class="avatar__subtitle">
+      Maintainer, SigNoz
+    </small>
+  </div>
+</div>
+
+<br />
 
 We are excited to share that we have raised $6.5M led by SignalFire and joined by Uncorrelated Ventures, co-founders of GitHub and PlanetScale as angels, to power our mission of bringing great observability tooling to companies of all sizes. The round is made up of our recent $5.4M raise led by SignalFire and our previously unannounced $1.1m round by YCombinator and bunch of angels.
 
@@ -44,9 +63,6 @@ Today, this makes SigNoz one of the most powerful opentelemetry native observabi
     <img src="/img/blog/2023/09/Product-Image.webp" alt="Correlating across metrics, traces and logs in a single platform"/>
     <figcaption><i>Correlating across metrics, traces and logs in a single platform</i></figcaption>
 </figure>
-
-
-
 
 ## Focus on solving issues faster & transparency
 
@@ -82,3 +98,5 @@ We would like to thank YCombinator for their early belief in us, early community
 Try [SigNoz Cloud](https://signoz.io/teams) today!
 
 Join our [SanFrancisco OpenTelemetry](https://lu.ma/lrd71rqh) meetup on October 4
+
+</div>
