@@ -10,7 +10,8 @@ You can directly send logs of your application to SigNoz using the Python SDKs p
 # For SigNoz Cloud 
 
 For sending logs to SigNoz cloud, while running the above example set the below environment variables
-* The value of `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable will be `https://ingest.{region}.signoz.cloud:443` where epending on the choice of your region for SigNoz cloud, the otlp endpoint will vary according to this table.
+* The value of `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable will be `https://ingest.{region}.signoz.cloud:443` where depending on the choice of your region for SigNoz cloud, the otlp endpoint will vary according to this table.
+  
   | Region | Endpoint                   |
   | ------ | -------------------------- |
   | US     | ingest.us.signoz.cloud:443 |
@@ -18,7 +19,10 @@ For sending logs to SigNoz cloud, while running the above example set the below 
   | EU     | ingest.eu.signoz.cloud:443 |
 
 * The value of `OTEL_EXPORTER_OTLP_HEADERS` environment variable will be `signoz-access-token=<SIGNOZ_INGESTION_KEY>` where `<SIGNOZ_INGESTION_KEY>` is your ingestion key
-* Your run command will look like `OTEL_EXPORTER_OTLP_ENDPOINT="https://ingest.{region}.signoz.cloud:443" OTEL_EXPORTER_OTLP_HEADERS=signoz-access-token=<SIGNOZ_INGESTION_KEY> python3 example.py`
+* Your run command will look like 
+  ```bash
+  OTEL_EXPORTER_OTLP_ENDPOINT="https://ingest.{region}.signoz.cloud:443" OTEL_EXPORTER_OTLP_HEADERS=signoz-access-token=<SIGNOZ_INGESTION_KEY> python3 example.py`
+  ```
 
 <!-- ## How to Collect Application Logs Using OTEL Python SDK?
 
