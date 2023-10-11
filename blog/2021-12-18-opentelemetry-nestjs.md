@@ -148,7 +148,7 @@ Remember to allow incoming requests to port 4318 of machine where SigNoz backend
 <br></br>
 
 3. **Import the tracer module where your app starts**<br></br>
-   On `main.ts` file or file where your app starts import tracer using below command. Note that this should be the first line in your main application file.
+   On `main.ts` file or file where your app starts import tracer using below command. Note that **this should be the first line in your main application file**.
    
    ```jsx
    import tracer from './tracer';
