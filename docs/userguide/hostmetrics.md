@@ -16,7 +16,7 @@ import TabItem from "@theme/TabItem";
 
 ## Overview
 
-The **Host Metrics dashboard** consists of charts for monitoring instance metrics and is designed as a generic dashboard with a hostname variable. It's used to visualize metrics from VMs with the <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver" rel="noopener noreferrer nofollow" target="_blank" >hostmetrics receiver</a> configured. You can access detailed information on common host metrics such as :
+The **Host Metrics dashboard** consists of charts for monitoring instance metrics and is designed as a generic dashboard with a hostname variable. You can access detailed information on common host metrics such as :
 
 - CPU Usage
 - Memory Usage
@@ -123,7 +123,7 @@ Follow the below steps to set up the HostMetrics Dashboard on SigNoz UI.
 :::note
 If SigNoz is installed on **Same VM** as host, you don't need to do this step.
 :::
-Follow the steps in **SigNoz Cloud section** of this <a href = "https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/" rel="noopener noreferrer nofollow" target="_blank" >tutorial</a> to get your Otel Collector agent up and running.
+Follow the steps in **Self-Host section** of this <a href = "https://signoz.io/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine/" rel="noopener noreferrer nofollow" target="_blank" >tutorial</a> to get your Otel Collector agent up and running.
 
 
 **Step 2** : Download/Copy the hostmetrics json file
@@ -140,7 +140,7 @@ Use this <a href = "https://github.com/SigNoz/dashboards/blob/main/hostmetrics/h
 
 **Step 3** : Import hostmetrics json file to SigNoz UI
 
-Open your SigNoz Cloud UI and go to the **Dashboards** section. In the top right corner, click on the **+ New Dashboard** button and select the Import JSON option from the dropdown menu.
+Open your SigNoz UI and go to the **Dashboards** section. In the top right corner, click on the **+ New Dashboard** button and select the Import JSON option from the dropdown menu.
 
 <figure data-zoomable align='center'>
     <img src="/img/hostmetrics-new-dashboard.webp" alt="How to create a New Hostmetrics Dashboard in SigNoz UI"/>
