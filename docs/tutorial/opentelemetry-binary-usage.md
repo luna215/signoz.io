@@ -429,7 +429,7 @@ from `telemetrygen` in the SigNoz UI.
 
 ## HostMetrics Dashboard
 
-To setup the Hostmetrics Dashboard, check the docs [here](https://signoz.io/docs/userguide/hostmetrics/)
+To setup the Hostmetrics Dashboard, check the docs [here](https://signoz.io/docs/userguide/hostmetrics/).
 
 ---
 
