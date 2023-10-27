@@ -61,7 +61,7 @@ The account corresponding to these credentials should have the below mentioned A
 }
 ```
 :::note
-Make sure you have aws configured on the machine where otel-collector is running
+Make sure you have AWS configured on the machine where otel-collector is running
 :::
 
 **Step 3** : Configure the awscloudwatch receiver
@@ -158,7 +158,7 @@ The account corresponding to these credentials should have the below mentioned A
 }
 ```
 :::note
-Make sure you have aws configured on the machine where otel-collector is running
+Make sure you have AWS configured on the machine where otel-collector is running
 :::
 
 **Step 3** : Configure the awscloudwatch receiver
