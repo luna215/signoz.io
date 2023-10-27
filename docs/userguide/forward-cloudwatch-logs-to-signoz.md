@@ -68,6 +68,8 @@ Make sure you have AWS configured on the machine where otel-collector is running
 
 We’ll add awscloudwatch receiver inside the receivers section of the `config.yaml` that we created in Step 1.
 
+The below configuration will do autodiscovery and collect 100 log groups starting with prefix application.
+
 ```bash
 
 receivers:
@@ -80,12 +82,23 @@ receivers:
 	        autodiscover:
 	          limit: 100
 	          prefix: application
-	          # streams: # all streams
-	          # prefixes: [kube-api-controller]
 ...
 ```
-The above configuration will discover 100 log groups starting with prefix `application`.
+Another configuration shown below will not do autodiscovery and specifies the names of the log groups to collect
+```bash
+receivers:
+...
+awscloudwatch:
+  profile: 'my-profile'
+  region: us-west-1
+  logs:
+    poll_interval: 5m
+    groups:
+      named:
+        /aws/eks/dev-0/cluster:
 
+...
+```
 To see the different parameters, some sample configurations and more details about the awscloudwatch receiver, checkout this <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscloudwatchreceiver" rel="noopener noreferrer nofollow" target="_blank" >GitHub link</a>.
 
 **Step 4** : Send logs to SigNoz
@@ -165,6 +178,8 @@ Make sure you have AWS configured on the machine where otel-collector is running
 
 We’ll add awscloudwatch receiver inside the receivers section of the `config.yaml` that we created in Step 1.
 
+The below configuration will do autodiscovery and collect 100 log groups starting with prefix application.
+
 ```bash
 
 receivers:
@@ -177,12 +192,23 @@ receivers:
 	        autodiscover:
 	          limit: 100
 	          prefix: application
-	          # streams: # all streams
-	          # prefixes: [kube-api-controller]
 ...
 ```
-The above configuration will discover 100 log groups starting with prefix `application`.
+Another configuration shown below will not do autodiscovery and specifies the names of the log groups to collect
+```bash
+receivers:
+...
+awscloudwatch:
+  profile: 'my-profile'
+  region: us-west-1
+  logs:
+    poll_interval: 5m
+    groups:
+      named:
+        /aws/eks/dev-0/cluster:
 
+...
+```
 To see the different parameters, some sample configurations and more details about the awscloudwatch receiver, checkout this <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscloudwatchreceiver" rel="noopener noreferrer nofollow" target="_blank" >GitHub link</a>.
 
 **Step 4** : Send logs to SigNoz
