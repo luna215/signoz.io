@@ -1,5 +1,5 @@
 ---
-id: forward-cloudwatch-logs-to-signoz
+id: send-cloudwatch-logs-to-signoz
 title: Forward Cloudwatch Logs to SigNoz
 description: Forward your AWS Cloudwatch logs to SigNoz Cloud/Self-Host
 
@@ -10,9 +10,9 @@ import TabItem from "@theme/TabItem";
 
 ## Overview
 
-AWS CloudWatch is a monitoring service that helps users keep tabs on their AWS resources. There are some  challenges that user encounter on Cloudwatch such as the absence of a unified observability experience, slightly higher costs, a focus on AWS-centric environments, and user experience limitations. 
+AWS CloudWatch is a monitoring service that helps users keep tabs on their AWS resources. There are some challenges that users encounter on Cloudwatch, such as the absence of a unified observability experience, slightly higher costs, a focus on AWS-centric environments, and user experience limitations.
 
-SigNoz effectively addresses these challenges, and in the following steps, we'll outline how to seamlessly forward logs from AWS CloudWatch to SigNoz.
+SigNoz effectively addresses these challenges, and in the following steps, we'll outline how to forward logs from AWS CloudWatch to SigNoz seamlessly.
 
 ## Setup
 
@@ -42,7 +42,7 @@ aws_access_key_id=AKIAI44QH8DHBEXAMPLE
 aws_secret_access_key=je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
 ```
 
-The account corresponding to these credentials should have the below mentioned AWS Identity and Access Management (IAM) policy. This policy allows the account associated with these permissions to describe and filter log events within all log groups in the specified AWS account which is crucial for setting up the necessary permissions to forward CloudWatch logs to SigNoz.
+The account corresponding to these credentials should have the below-mentioned AWS Identity and Access Management (IAM) policy. This policy allows the account associated with these permissions to describe and filter log events within all log groups in the specified AWS account, which is crucial for setting up the necessary permissions to forward CloudWatch logs to SigNoz.
 
 ```bash
 {
@@ -66,9 +66,13 @@ Make sure you have AWS configured on the machine where otel-collector is running
 
 **Step 3** : Configure the awscloudwatch receiver
 
-We’ll add awscloudwatch receiver inside the receivers section of the `config.yaml` that we created in Step 1.
+We’ll add an awscloudwatch receiver inside the receivers section of the `config.yaml` that we created in Step 1 for the OTel collector.
 
-The below configuration will do autodiscovery and collect 100 log groups starting with prefix application.
+You can configure your receiver to collect logs with different conditions. To see the different parameters, some sample configurations and more details about the awscloudwatch receiver, check out this <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscloudwatchreceiver" rel="noopener noreferrer nofollow" target="_blank" >GitHub link</a>.
+
+Here are two sample configurations:
+
+1. This configuration below will do autodiscovery and collect 100 log groups starting with prefix application.
 
 ```bash
 
@@ -84,7 +88,7 @@ receivers:
 	          prefix: application
 ...
 ```
-Another configuration shown below will not do autodiscovery and specifies the names of the log groups to collect
+2. This configuration below will not do autodiscovery and specifies the names of the log groups to collect.
 ```bash
 receivers:
 ...
@@ -99,10 +103,10 @@ awscloudwatch:
 
 ...
 ```
-To see the different parameters, some sample configurations and more details about the awscloudwatch receiver, checkout this <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscloudwatchreceiver" rel="noopener noreferrer nofollow" target="_blank" >GitHub link</a>.
 
-**Step 4** : Send logs to SigNoz
-To test out the receiver create a pipeline in the pipeline section of the `config.yaml` created in Step 1.
+
+**Step 4** : Send logs to SigNoz <br></br>
+To test out the receiver, create a pipeline in the pipeline section of the `config.yaml` created in Step 1 for Otel Collector.
 
 ```bash
 ...
@@ -125,7 +129,7 @@ To test out the receiver create a pipeline in the pipeline section of the `confi
       exporters: [otlp]
 ```
 
-This will log out everything from the receiver and you should be able to see your Cloudwatch logs in the SigNoz Cloud UI.
+This will log out everything from the receiver and you should be able to see your Cloudwatch logs in the logs tabs of SigNoz Cloud UI.
 
 </TabItem>
 
@@ -152,7 +156,7 @@ aws_access_key_id=AKIAI44QH8DHBEXAMPLE
 aws_secret_access_key=je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
 ```
 
-The account corresponding to these credentials should have the below mentioned AWS Identity and Access Management (IAM) policy. This policy allows the account associated with these permissions to describe and filter log events within all log groups in the specified AWS account which is crucial for setting up the necessary permissions to forward CloudWatch logs to SigNoz.
+The account corresponding to these credentials should have the below-mentioned AWS Identity and Access Management (IAM) policy. This policy allows the account associated with these permissions to describe and filter log events within all log groups in the specified AWS account, which is crucial for setting up the necessary permissions to forward CloudWatch logs to SigNoz.
 
 ```bash
 {
@@ -176,9 +180,13 @@ Make sure you have AWS configured on the machine where otel-collector is running
 
 **Step 3** : Configure the awscloudwatch receiver
 
-We’ll add awscloudwatch receiver inside the receivers section of the `config.yaml` that we created in Step 1.
+We’ll add an awscloudwatch receiver inside the receivers section of the `config.yaml` that we created in Step 1 for the OTel collector.
 
-The below configuration will do autodiscovery and collect 100 log groups starting with prefix application.
+You can configure your receiver to collect logs with different conditions. To see the different parameters, some sample configurations and more details about the awscloudwatch receiver, check out this <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscloudwatchreceiver" rel="noopener noreferrer nofollow" target="_blank" >GitHub link</a>.
+
+Here are two sample configurations:
+
+1. This configuration below will do autodiscovery and collect 100 log groups starting with prefix application.
 
 ```bash
 
@@ -194,7 +202,7 @@ receivers:
 	          prefix: application
 ...
 ```
-Another configuration shown below will not do autodiscovery and specifies the names of the log groups to collect
+2. This configuration below will not do autodiscovery and specifies the names of the log groups to collect.
 ```bash
 receivers:
 ...
@@ -209,10 +217,10 @@ awscloudwatch:
 
 ...
 ```
-To see the different parameters, some sample configurations and more details about the awscloudwatch receiver, checkout this <a href = "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscloudwatchreceiver" rel="noopener noreferrer nofollow" target="_blank" >GitHub link</a>.
 
-**Step 4** : Send logs to SigNoz
-To test out the receiver create a pipeline in the pipeline section of the `config.yaml` created in Step 1.
+
+**Step 4** : Send logs to SigNoz <br></br>
+To test out the receiver, create a pipeline in the pipeline section of the `config.yaml` created in Step 1 for Otel Collector.
 
 ```bash
 ...
@@ -235,7 +243,7 @@ To test out the receiver create a pipeline in the pipeline section of the `confi
       exporters: [clickhouselogsexporter]
 ```
 
-This will log out everything from the receiver and you should be able to see your Cloudwatch logs in the SigNoz UI.
+This will log out everything from the receiver and you should be able to see your Cloudwatch logs in the logs tabs of SigNoz UI.
 
 </TabItem>
 
