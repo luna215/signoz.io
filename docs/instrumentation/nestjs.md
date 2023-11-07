@@ -45,7 +45,7 @@ npm install --save @opentelemetry/exporter-trace-otlp-http@^0.39.1
 Step 2. Create `tracer.ts` file<br></br>
 You need to configure the endpoint for SigNoz cloud in this file.
 
-```js
+```ts
 'use strict';
 
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
@@ -57,7 +57,9 @@ import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
 // Configure the SDK to export telemetry data to the console
 // Enable all auto-instrumentations from the meta package
 const exporterOptions = {
+  //highlight-start
   url: 'https://ingest.{region}.signoz.cloud:443/v1/traces',
+  //highlight-end
 };
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
@@ -71,7 +73,7 @@ const sdk = new opentelemetry.NodeSDK({
 
 // initialize the SDK and register with the OpenTelemetry API
 // this enables the API to record telemetry
-sdk.start()
+sdk.start();
 
 // gracefully shut down the SDK on process exit
 process.on('SIGTERM', () => {
@@ -161,7 +163,7 @@ npm install --save @opentelemetry/exporter-trace-otlp-http@^0.39.1
 
 Step 2. Create `tracer.ts` file<br></br>
 
-```js
+```ts
 'use strict';
 
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
@@ -173,7 +175,9 @@ import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
 // Configure the SDK to export telemetry data to the console
 // Enable all auto-instrumentations from the meta package
 const exporterOptions = {
+  //highlight-start
   url: 'http://localhost:4318/v1/traces',
+  //highlight-end
 };
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
@@ -187,7 +191,7 @@ const sdk = new opentelemetry.NodeSDK({
 
 // initialize the SDK and register with the OpenTelemetry API
 // this enables the API to record telemetry
-sdk.start()
+sdk.start();
 
 // gracefully shut down the SDK on process exit
 process.on('SIGTERM', () => {
@@ -257,7 +261,7 @@ npm install --save @opentelemetry/exporter-trace-otlp-http@^0.39.1
 
 Step 2. Create `tracer.ts` file<br></br>
 
-```js
+```ts
 'use strict';
 
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
@@ -269,7 +273,9 @@ import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions'
 // Configure the SDK to export telemetry data to the console
 // Enable all auto-instrumentations from the meta package
 const exporterOptions = {
+  //highlight-start
   url: 'http://localhost:4318/v1/traces',
+  //highlight-end
 };
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
@@ -283,7 +289,7 @@ const sdk = new opentelemetry.NodeSDK({
 
 // initialize the SDK and register with the OpenTelemetry API
 // this enables the API to record telemetry
-sdk.start()
+sdk.start();
 
 // gracefully shut down the SDK on process exit
 process.on('SIGTERM', () => {
@@ -388,7 +394,7 @@ Internally, it calls the specific auto-instrumentation library for components us
 
 2. Create a `tracer.ts` file
     
-    ```jsx
+  ```ts
   'use strict';
 
   import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
@@ -400,7 +406,9 @@ Internally, it calls the specific auto-instrumentation library for components us
   // Configure the SDK to export telemetry data to the console
   // Enable all auto-instrumentations from the meta package
   const exporterOptions = {
+    //highlight-start
     url: 'http://localhost:4318/v1/traces',
+    //highlight-end
   };
 
   const traceExporter = new OTLPTraceExporter(exporterOptions);
@@ -414,7 +422,7 @@ Internally, it calls the specific auto-instrumentation library for components us
 
   // initialize the SDK and register with the OpenTelemetry API
   // this enables the API to record telemetry
-  sdk.start()
+  sdk.start();
 
   // gracefully shut down the SDK on process exit
   process.on('SIGTERM', () => {
