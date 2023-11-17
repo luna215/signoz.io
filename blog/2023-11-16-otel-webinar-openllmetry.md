@@ -24,8 +24,6 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
 Observability isn't a single feature. It's not a box you can check off. Observability is a design goal, a set of principles, and a set of tools. Observability is about understanding what's happening in your system. And every system that you don't fully understand, where you know only the inputs and outputs, is a liability. We derisively call these systems 'Black Boxes.' In the world of very lage language models, transformers whose general concept we understand but whose internals are harder to quantify, we find ourselves confronted with a whole new landscape of black boxes.
 <!--truncate-->
 
-![Cover Image](/img/blog/2023/11/otel-webinar-openllmetry-cover.jpeg)
-
 As we build new services with remarkably beleivable automated outputs, we are becoming reliant on Large Language Models (LLMs). While observability tools like OpenTelemetry's language SDK's have offer deep insight into the working of our own code, the dependencies on LLM API's are largely unmonitored, showing up as large unlabeled spans within traces.
 
 The instrumentation library OpenLLMetry from Traceloop offers a way to monitor the usage of LLM API's. In a recent webinar we got to see how SigNoz dashboards can help you monitor resource use, performance and find problems before your token usage on any AI service goes haywire.
