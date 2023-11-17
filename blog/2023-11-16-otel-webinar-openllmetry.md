@@ -1,10 +1,10 @@
 ---
-title: OpenTelemetry for AI - OpenLLMetry with SigNoz and Traceloop 
+title: How to Montior Your AI Model Usage with SigNoz and Traceloop 
 slug: otel-webinar-openllmetry
 date: 2023-11-16
 tags: [OpenTelemetry]
-authors: priyansh
-description: Join Nica and Nir to discuss how machine learning can be monitored with OpenTelemetry. We'll see how the SigNoz dashboards can help you monitor resource use, performance, and find problems before your infra budget goes haywire....
+authors: nicamellifera
+description: The instrumentation library OpenLLMetry from Traceloop offers a way to monitor the usage of LLM API's. In a recent webinar we got to see how SigNoz dashboards can help you monitor resource use, performance and find problems before your token usage on any AI service goes haywire.
 image: /img/blog/2023/11/otel-webinar-openllmetry-cover.jpeg
 keywords:
   - opentelemetry
@@ -21,17 +21,19 @@ import { LiteYoutubeEmbed } from "react-lite-yt-embed";
   <link rel="canonical" href="https://signoz.io/blog/otel-webinar-openllmetry/"/>
 </head>
 
-Join <a href="https://github.com/serverless-mom" rel="nofollow">Nočnica Mellifera</a> and <a href="https://www.linkedin.com/in/nirga/" rel="nofollow">Nir</a> to discuss how machine learning can be monitored with OpenTelemetry. We'll see how the SigNoz dashboards can help you monitor resource use, performance, and find problems before your infra budget goes haywire.
-
-
-Below is the recording and an edited transcript of the conversation.
-
+Observability isn't a single feature. It's not a box you can check off. Observability is a design goal, a set of principles, and a set of tools. Observability is about understanding what's happening in your system. And every system that you don't fully understand, where you know only the inputs and outputs, is a liability. We derisively call these systems 'Black Boxes.' In the world of very lage language models, transformers whose general concept we understand but whose internals are harder to quantify, we find ourselves confronted with a whole new landscape of black boxes.
 <!--truncate-->
 
+![Cover Image](/img/blog/2023/11/otel-webinar-openllmetry-cover.jpeg)
+
+As we build new services with remarkably beleivable automated outputs, we are becoming reliant on Large Language Models (LLMs). While observability tools like OpenTelemetry's language SDK's have offer deep insight into the working of our own code, the dependencies on LLM API's are largely unmonitored, showing up as large unlabeled spans within traces.
+
+The instrumentation library OpenLLMetry from Traceloop offers a way to monitor the usage of LLM API's. In a recent webinar we got to see how SigNoz dashboards can help you monitor resource use, performance and find problems before your token usage on any AI service goes haywire.
+
+Take a look at the conversation between <a href="https://github.com/serverless-mom" rel="nofollow">Nočnica Mellifera</a> and <a href="https://www.linkedin.com/in/nirga/" rel="nofollow">Nir</a> as we discuss how SigNoz and Traceloop can give a clearer picture of your AI model usage.
 
 ## Summary of the Talk
 
-[Nica's part ]
 
 <LiteYoutubeEmbed id="feKopGAlKtc" mute={false} />
 
@@ -43,9 +45,9 @@ Below is the recording and an edited transcript of the conversation.
 
 What I said was I said a couple hundred." She said, "How many exactly did you break?" I said, "Oh boy, you know she's more upset with me than I thought, 223."
 
-She says, "Oh, that's fine. 223. You're always broken. If it had been 224 or 220, that would have been a problem. But 223 is fine. You're ready to go and commit."
+She says, "Oh, that's fine. 223. They're always broken. If it had been 224 or 220, that would have been a problem. But 223 is fine. You're ready to go and commit."
 
-That is always a better thing to start with than, I think we're live. But that has that much to do with what we're talking about today. We're talking about OpenTelemetry and machine learning with my guest. We have Nir here today. Nir, say hi to the people. Tell us something about Trace Loop. Yeah, thank you so much for joining us. 
+That is always a better thing to start with than, I think we're live. But that has that much to do with what we're talking about today. We're talking about OpenTelemetry and machine learning with my guest. We have Nir here today. Nir, say hi to the people. Tell us something about Trace Loop. Yeah, thank you so much for joining us.
 
 **NIR:** Thank you. I'm Nir, the CEO of Trace Loop. We're a YC company. We did YC Winter '23, and we are focusing on building a tool for monitoring and evaluation of large language models.
 
