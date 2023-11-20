@@ -171,7 +171,7 @@ Let's see how long it takes...
 
 When you are first implementing open telemetry instrumentation or when using instrumentation, it is important to disable batching so that you can see each request traced in your dashboard. This is because you want to be able to see the results of your changes as soon as possible. 
 
-**NIR:** Absolutely. So, I'll do that now. We're using Poetry to install the SDK. 
+**NIR:** Absolutely. So, I'll do that now. We're using Poetry to install the SDK.
 
 *Installation process is performed.*
 
@@ -261,6 +261,11 @@ Now, can we take a look at a couple of traces in the SigNoz dashboard? Let's exp
 
 We should be able to see the traces from our application within SigNoz.
 
+<figure data-zoomable align='center'>
+    <img src="/img/blog/2023/11/traceloop2.webp" alt="Add a user for monitoring"/>
+    <figcaption><i>The list of traces from OpenLLMetry</i></figcaption>
+</figure>
+
 *They wait for a moment and start seeing the traces.*
 
 We've got a couple of traces. Let's explore them. This is where we can dive into the details of what our application is doing.
@@ -271,6 +276,11 @@ We've got a couple of traces. Let's explore them. This is where we can dive into
 
 But what's impressive is how well-structured the attributes are. The key naming is logical and makes sense. It's organized in a way that you can query and analyze the data effectively. And check out the prompt attributes – they're nicely labeled and provide meaningful data.
 
+<figure data-zoomable align='center'>
+    <img src="/img/blog/2023/11/traceloop3.webp" alt="Add a user for monitoring"/>
+    <figcaption><i>Seeing the full prompt and attribute within a trace</i></figcaption>
+</figure>
+
 **NICA:** This is the kind of visibility that's essential for understanding your application's behavior.
 
 *They discuss the service name and attributes in the traces.*
@@ -280,6 +290,12 @@ You can set your service name explicitly if needed, but the default service name
 Customizing the service name gives you the flexibility to label services in a way that suits your business.
 
 Nir That's true. And here's one more thing I want to show. Some people might be hesitant to annotate their code. But if you're using structured frameworks like Langchain, you don't need to annotate anything. Frameworks often have built-in structures that OpenTelemetry can utilize for tracing. I've rewritten the example you saw earlier, this time using Langchain. And you can see that you don't need to annotate anything. We're still calling Trace Loop to initialize it. It's essentially two lines of code to integrate with OpenTelemetry.
+
+<figure data-zoomable align='center'>
+    <img src="/img/blog/2023/11/traceloop1.webp" alt="Add a user for monitoring"/>
+    <figcaption><i>adding an init line</i></figcaption>
+</figure>
+
 
 It's a very clean approach, and it saves you the effort of manually annotating your code.
 
