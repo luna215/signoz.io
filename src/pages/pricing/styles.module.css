@@ -95,10 +95,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.5rem;
 }
 .pricing .packageDetailBlock span {
   line-height: var(--ifm-font-line-height);
-  margin-bottom: 0.5rem;
+  /* margin-bottom: 0.5rem; */
 }
 .pricing .packageDetailTitle {
   font-style: normal;

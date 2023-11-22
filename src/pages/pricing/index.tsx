@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import FAQBody from "../../components/FAQPricing";
@@ -21,7 +21,7 @@ function Pricing() {
       <PricingPlans />
       <ExploreAllFeature />
       {/* Companies Logo */}
-      <TrustedByTeams />      
+      <TrustedByTeams />
       {/* Cost Comparison Graph */}
       <CostComparison />
       {/* Data protection */}
@@ -31,7 +31,7 @@ function Pricing() {
       {/* More Options */}
       <CommunityEdition />
       {/* FAQ section */}
-      {<FAQ/>}
+      {<FAQ />}
       {/* User Review */}
       <UserReview />
       {/* Give a Try CTA */}
@@ -117,6 +117,44 @@ const LoadingIcon = () => {
 };
 
 const PricingPlans = () => {
+  const TRACES_AND_LOGS_PRICES = {
+    15: 0.3,
+    30: 0.4,
+    90: 0.6,
+    180: 0.8,
+  };
+  const METRICS_PRICES = {
+    1: 0.1,
+    3: 0.12,
+    6: 0.15,
+    13: 0.18,
+  };
+  const RETENTION_PERIOD = {
+    TRACES_AND_LOGS: [
+      { days: 15, price: 0.3 },
+      { days: 30, price: 0.4 },
+      { days: 90, price: 0.6 },
+      { days: 180, price: 0.8 },
+    ],
+    METRICS: [
+      { months: 1, price: 0.1 },
+      { months: 3, price: 0.12 },
+      { months: 6, price: 0.15 },
+      { months: 13, price: 0.18 },
+    ],
+  };
+
+  // Period
+  const [tracesRetentionPeriod, setTracesRetentionPeriod] = useState(
+    RETENTION_PERIOD.TRACES_AND_LOGS[0].days
+  );
+  const [logsRetentionPeriod, setLogsRetentionPeriod] = useState(
+    RETENTION_PERIOD.TRACES_AND_LOGS[0].days
+  );
+  const [metricsRetentionPeriod, setMetricsRetentionPeriod] = useState(
+    RETENTION_PERIOD.METRICS[0].months
+  );
+
   const [tab, setTab] = useState("cloud");
 
   return (
@@ -149,7 +187,6 @@ const PricingPlans = () => {
             </nav>
           </div>
         </div>
-
         <div className="flex flex-col items-center mb-5 text-center mx-auto max-w-4xl">
           <Heading type={1}>
             Transparent & Predictable Pricing for{" "}
@@ -164,557 +201,869 @@ const PricingPlans = () => {
             with SigNoz. No user-based and host-based pricing.
           </SubHeading>
         </div>
+        {tab === "cloud" ? (
+          <>
+            {/* Cloud Plan */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-8 md:max-w-md lg:max-w-6xl mx-auto justify-center pricing-plans">
+              <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
+                <div>
+                  <h3 className="font-heading text-2xl font-bold ">Teams</h3>
+                  <p className="leading-relaxed text-base mb-4 text-gray-400">
+                    For teams that need high-performing applications.
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <p className="m-0">
+                      Starts at just
+                      <br />
+                      <span className="text-xl text-primary-400">
+                        $199/Month*
+                      </span>
+                    </p>
+                    <div>
+                      <Link
+                        id="btn-pricing-signoz-cloud-1"
+                        className={`button button--primary ${styles.pricingCtaBtn}`}
+                        href={"/teams/"}
+                      >
+                        Get started - free
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <Divider isDashed />
+                <div className="__card__body">
+                  <div
+                    className={`${styles.pricingDetails} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>Pricing</h4>
+                    <div>
+                      <span>Logs</span>
+                      <div>
+                        <span>
+                          <span className="text-primary-500">
+                            ${TRACES_AND_LOGS_PRICES[logsRetentionPeriod]}
+                          </span>{" "}
+                          per GB ingested &mdash;&nbsp;
+                        </span>
+                        <select
+                          className="border text-sm rounded-lg block w-fit p-1 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 accent-primary-400"
+                          value={logsRetentionPeriod}
+                          onChange={(e) =>
+                            setLogsRetentionPeriod(Number(e.target.value))
+                          }
+                        >
+                          {RETENTION_PERIOD.TRACES_AND_LOGS.map(
+                            (option, idx) => (
+                              <option
+                                key={`${option.days}-${idx}`}
+                                value={option.days}
+                              >{`${option.days} days`}</option>
+                            )
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <span>Traces</span>
+                      <div>
+                        <span>
+                          <span className="text-primary-500">
+                            ${TRACES_AND_LOGS_PRICES[tracesRetentionPeriod]}
+                          </span>{" "}
+                          per GB ingested &mdash;&nbsp;
+                        </span>
+                        <select
+                          className="border text-sm rounded-lg block w-fit p-1 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 accent-primary-400"
+                          value={tracesRetentionPeriod}
+                          onChange={(e) =>
+                            setTracesRetentionPeriod(Number(e.target.value))
+                          }
+                        >
+                          {RETENTION_PERIOD.TRACES_AND_LOGS.map(
+                            (option, idx) => (
+                              <option
+                                key={`${option.days}-${idx}`}
+                                value={option.days}
+                              >{`${option.days} days`}</option>
+                            )
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <span>Metrics</span>
+                      <div>
+                        <span>
+                          <span className="text-primary-500">
+                            ${METRICS_PRICES[metricsRetentionPeriod]}
+                          </span>{" "}
+                          per mn samples &mdash;&nbsp;
+                        </span>
+                        <select
+                          className="border text-sm rounded-lg block w-fit p-1 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500 accent-primary-400"
+                          value={metricsRetentionPeriod}
+                          onChange={(e) =>
+                            setMetricsRetentionPeriod(Number(e.target.value))
+                          }
+                        >
+                          {RETENTION_PERIOD.METRICS.map((option, idx) => (
+                            <option
+                              key={`${option.months}-${idx}`}
+                              value={option.months}
+                            >{`${option.months} ${
+                              option.months === 1 ? "month" : "months"
+                            }`}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <br />
+                    <div>
+                      <span>
+                        <li>
+                          Add as many users as you want. No user-based pricing
+                        </li>
+                      </span>
+                    </div>
+                    <div>
+                      <span>
+                        {" "}
+                        <li>No host-based pricing</li>
+                      </span>
+                    </div>
+                    <br />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-8 md:max-w-md lg:max-w-6xl mx-auto justify-center pricing-plans">
-          <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
-            <div>
-              <h3 className="font-heading text-2xl font-bold ">Teams</h3>
-              <p className="leading-relaxed text-base mb-4 text-gray-400">
-                For teams that need high-performing applications.
-              </p>
-              <p>
-                Starts at just
-                <br />
-                <span className="text-xl text-primary-400">$199/Month*</span>
-              </p>
-            </div>
-            <Divider isDashed />
-            <div className="__card__body">
-              <div
-                className={`${styles.pricingDetails} ${styles.packageDetailBlock}`}
-              >
-                <h4 className={styles.packageDetailTitle}>Pricing</h4>
-                <div>
-                  <span>Logs</span>
-                  <span>$0.3 per GB ingested</span>
+                    <div>
+                      <span>
+                        *$199 includes data usage. Monthly bill will be $199
+                        till you ingest data higher than what's covered in $199.
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <p className={styles.retention}>
+                    Retention: 15 days for Traces & Logs, 30 days for Metrics
+                  </p>
+                  <Divider isDashed />
+                  <div
+                    className={`${styles.deploymentOptions} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>
+                      Deployment Options
+                    </h4>
+                    <div>
+                      <span>SaaS</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div></div>
+                  </div>
+                  <Divider isDashed />
+                  <div
+                    className={`${styles.support} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>Support</h4>
+                    <div>
+                      <span>Community Slack</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Email</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Dedicated Slack Channel</span>
+                      <span className="text-right">On spends above $999</span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div className={styles.packageDetailBlock}>
+                    <h4 className={styles.packageDetailTitle}>Features</h4>
+                    <ul className="list-icon-right">
+                      <li>APM & Distributed Tracing</li>
+                      <li>Log Management</li>
+                      <li>Infrastructure Monitoring</li>
+                      <li>Exceptions Monitoring</li>
+                      <li>Alerts Management</li>
+                      <li>SSO and SAML Support</li>
+                      <li>Service Dependency Visualization</li>
+                      <li>Run aggregates on ingested spans</li>
+                      <li>Live Tail Logging</li>
+                      <li>Unlimited Logs & Traces based Dashboards</li>
+                      <li>Dashboard locking</li>
+                      <li>Visualize very large traces (&gt;10K spans)</li>
+                    </ul>
+                  </div>
+                  <Divider isDashed />
+                  <div className={styles.packageDetailBlock}>
+                    <h4 className={styles.packageDetailTitle}>Upcoming</h4>
+                    <ul className="list-icon-right">
+                      <li>AWS Cloudwatch Integration</li>
+                    </ul>
+                  </div>
                 </div>
-                <div>
-                  <span>Traces</span>
-                  <span>$0.3 per GB ingested</span>
+                <Divider isDashed />
+                <div className={`__card__footer ${styles.card__footer}`}>
+                  <Link
+                    id="btn-pricing-signoz-cloud-2"
+                    className={`button button--primary ${styles.pricingCtaBtn}`}
+                    href={"/teams/"}
+                  >
+                    Get started - free
+                  </Link>
                 </div>
+              </div>
+              <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
                 <div>
-                  <span>Metrics</span>
-                  <span>$0.1 per mn samples</span>
-                </div>
-                <br />
-                <div>
-                  <span>
-                    <li>
-                      Add as many users as you want. No user-based pricing
-                    </li>
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    {" "}
-                    <li>No host-based pricing</li>
-                  </span>
-                </div>
-                <br />
+                  <h3 className="font-heading text-2xl font-bold ">
+                    Enterprise Cloud
+                  </h3>
+                  <p className="leading-relaxed text-base mb-4 text-gray-400">
+                    For at-scale orgs with advanced security, compliance and
+                    support needs.
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <p className="m-0">Flexible Pricing for scale</p>
 
-                <div>
-                  <span>
-                    *$199 includes data usage. Monthly bill will be $199 till
-                    you ingest data higher than what's covered in $199.
-                  </span>
+                    <div>
+                      <Link
+                        id="btn-pricing-signoz-enterprise-1"
+                        className={`button button--primary ${styles.pricingCtaBtn}`}
+                        href={"/enterprise/"}
+                      >
+                        Contact Us
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <Divider isDashed />
-              <p className={styles.retention}>
-                Retention: 15 days for Traces & Logs, 30 days for Metrics
-              </p>
-              <Divider isDashed />
-              <div
-                className={`${styles.deploymentOptions} ${styles.packageDetailBlock}`}
-              >
-                <h4 className={styles.packageDetailTitle}>
-                  Deployment Options
-                </h4>
-                <div>
-                  <span>SaaS</span>
-                  <span>
-                    <RightSVG />
-                  </span>
+                <Divider isDashed />
+                <div className="__card__body">
+                  <div
+                    className={`${styles.pricingDetails} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>Pricing</h4>
+                    <div></div>
+                    <div>
+                      <span>Custom Pricing</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Custom Retention</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div
+                    className={`${styles.deploymentOptions} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>
+                      Deployment Options
+                    </h4>
+                    <div>
+                      <span>SaaS</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Managed by SigNoz in your cloud</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div
+                    className={`${styles.support} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>Support</h4>
+                    <div>
+                      <span>Email</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Dedicated Slack Channel</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Team Training</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Dashboard Configuration Support</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Instrumentation Support</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>SLA w/ downtime developer pairing</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div className={styles.packageDetailBlock}>
+                    <h4 className={styles.packageDetailTitle}>Features</h4>
+                    <p className={styles.featureBlur}>
+                      Includes all features in Team
+                    </p>
+                    <ul className="list-icon-right">
+                      <li>Custom integration for metrics and logs</li>
+                      <li>AWS Private Link</li>
+                      <li>VPC Peering</li>
+                      {/* <li>Security tightening for on-prem installation</li>
+                  <li>Monitor Health of SigNoz</li> */}
+                      <li>Query API Keys (access data from anywhere)</li>
+                    </ul>
+                  </div>
+                  <Divider isDashed />
+                  <div className={styles.packageDetailBlock}>
+                    <h4 className={styles.packageDetailTitle}>Upcoming</h4>
+                    <ul className="list-icon-right">
+                      <li>Finer RBAC with custom roles</li>
+                      <li>Audit Logs</li>
+                      <li>Custom retention for different sources of logs</li>
+                      <li>Multi-tenancy</li>
+                    </ul>
+                  </div>
                 </div>
-                <div></div>
-              </div>
-              <Divider isDashed />
-              <div className={`${styles.support} ${styles.packageDetailBlock}`}>
-                <h4 className={styles.packageDetailTitle}>Support</h4>
-                <div>
-                  <span>Community Slack</span>
-                  <span>
-                    <RightSVG />
-                  </span>
+                <Divider isDashed />
+                <div className={`__card__footer ${styles.card__footer}`}>
+                  <Link
+                    id="btn-pricing-signoz-enterprise-2"
+                    className={`button button--primary ${styles.pricingCtaBtn}`}
+                    href={"/enterprise/"}
+                  >
+                    Contact Us
+                  </Link>
                 </div>
-                <div>
-                  <span>Email</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>Dedicated Slack Channel</span>
-                  <span className="text-right">On spends above $999</span>
-                </div>
-              </div>
-              <Divider isDashed />
-              <div className={styles.packageDetailBlock}>
-                <h4 className={styles.packageDetailTitle}>Features</h4>
-                <ul className="list-icon-right">
-                  <li>APM & Distributed Tracing</li>
-                  <li>Log Management</li>
-                  <li>Infrastructure Monitoring</li>
-                  <li>Exceptions Monitoring</li>
-                  <li>Alerts Management</li>
-                  <li>SSO and SAML Support</li>
-                  <li>Service Dependency Visualization</li>
-                  <li>Run aggregates on ingested spans</li>
-                  <li>Live Tail Logging</li>
-                  <li>Unlimited Logs & Traces based Dashboards</li>
-                </ul>
-              </div>
-              <Divider isDashed />
-              <div className={styles.packageDetailBlock}>
-                <h4 className={styles.packageDetailTitle}>Upcoming</h4>
-                <ul className="list-icon-right">
-                  <li>AWS Cloudwatch Integration</li>
-                </ul>
               </div>
             </div>
-            <Divider isDashed />
-            <div className={`__card__footer ${styles.card__footer}`}>
-              <Link
-                id="btn-pricing-signoz-cloud-2"
-                className={`button button--primary ${styles.pricingCtaBtn}`}
-                href={"/teams/"}
-              >
-                Get started - free
-              </Link>
+          </>
+        ) : (
+          <>
+            {/* Self Managed Plan */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-8 md:max-w-md lg:max-w-6xl mx-auto justify-center pricing-plans">
+              <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
+                <div>
+                  <h3 className="font-heading text-2xl font-bold ">Community Edition</h3>
+                  <p className="leading-relaxed text-base mb-4 text-gray-400">
+                  Free to Self Host
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <p className="m-0">
+                      Some Link
+                    </p>
+                    <div>
+                      <Link
+                        id="btn-pricing-signoz-cloud-1"
+                        className={`button button--primary ${styles.pricingCtaBtn}`}
+                        href={"/teams/"}
+                      >
+                        TODO:SOME-LINK:Get started - free
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <Divider isDashed />
+                <div className="__card__body">
+                  <div
+                    className={`${styles.support} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>Support</h4>
+                    <div>
+                      <span>Community Slack</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div className={styles.packageDetailBlock}>
+                    <h4 className={styles.packageDetailTitle}>Features</h4>
+                    <ul className="list-icon-right">
+                      <li>APM & Distributed Tracing</li>
+                      <li>Log Management</li>
+                      <li>Infrastructure Monitoring</li>
+                      <li>Exceptions Monitoring</li>
+                      <li>Alerts Management</li>
+                      <li>Service Dependency Visualization</li>
+                    </ul>
+                  </div>
+                </div>
+                <Divider isDashed />
+                <div className={`__card__footer ${styles.card__footer}`}>
+                  <Link
+                    id="btn-pricing-signoz-cloud-2"
+                    className={`button button--primary ${styles.pricingCtaBtn}`}
+                    href={"/teams/"}
+                  >
+                    TODO:SOME-LINKGet started - free
+                  </Link>
+                </div>
+              </div>
+              <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
+                <div>
+                  <h3 className="font-heading text-2xl font-bold ">
+                  Enterprise Edition
+                  </h3>
+                  <p className="leading-relaxed text-base mb-4 text-gray-400">
+                  </p>
+                </div>
+                <Divider isDashed />
+                <div className="__card__body">
+                  <div
+                    className={`${styles.pricingDetails} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>Pricing</h4>
+                    <div></div>
+                    <div>
+                      <span>Custom Pricing</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div
+                    className={`${styles.deploymentOptions} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>
+                      Deployment Options
+                    </h4>
+                    <div>
+                      <span>Self Host with support contract by SigNoz team <span className="line-through">Managed by SigNoz in your cloud</span></span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div
+                    className={`${styles.support} ${styles.packageDetailBlock}`}
+                  >
+                    <h4 className={styles.packageDetailTitle}>Support</h4>
+                    <div>
+                      <span>Email</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Dedicated Slack Channel</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Team Training</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Dashboard Configuration Support</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Instrumentation Support</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>SLA w/ downtime developer pairing</span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                  </div>
+                  <Divider isDashed />
+                  <div className={styles.packageDetailBlock}>
+                    <h4 className={styles.packageDetailTitle}>Features</h4>
+                    <p className={styles.featureBlur}>
+                    Includes all features in community edition
+                    </p>
+                    <ul className="list-icon-right">
+                      <li>SSO and SAML Support</li>
+                      <li>Unlimited Logs & Traces based Dashboards</li>
+                      <li>Dashboard locking</li>
+                      <li>Visualize very large traces (&gt;10K spans)</li>
+                      <li>Run aggregates on ingested spans</li>
+                      <li>Live Tail Logging</li>
+                      <li>Security tightening for on-prem installation</li>
+                      <li>Monitor Health of SigNoz</li>
+                      <li>Query API Keys (access data from anywhere)</li>
+                    </ul>
+                  </div>
+                  <Divider isDashed />
+                  <div className={styles.packageDetailBlock}>
+                    <h4 className={styles.packageDetailTitle}>Upcoming</h4>
+                    <ul className="list-icon-right">
+                      <li>Finer RBAC with custom roles</li>
+                      <li>Audit Logs</li>
+                      <li>Custom retention for different sources of logs</li>
+                      <li>Multi-tenancy</li>
+                    </ul>
+                  </div>
+                </div>
+                <Divider isDashed />
+                <div className={`__card__footer ${styles.card__footer}`}>
+                  <Link
+                    id="btn-pricing-signoz-enterprise-2"
+                    className={`button button--primary ${styles.pricingCtaBtn}`}
+                    href={"/enterprise/"}
+                  >
+                    TODO:SOME-LINK:Contact Us
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
-            <div>
-              <h3 className="font-heading text-2xl font-bold ">
-                Enterprise Cloud
-              </h3>
-              <p className="leading-relaxed text-base mb-4 text-gray-400">
-                For at-scale orgs with advanced security, compliance and support
-                needs.
-              </p>
-              <p>Flexible Pricing for scale</p>
-            </div>
-            <Divider isDashed />
-            <div className="__card__body">
-              <div
-                className={`${styles.pricingDetails} ${styles.packageDetailBlock}`}
-              >
-                <h4 className={styles.packageDetailTitle}>Pricing</h4>
-                <div></div>
-                <div>
-                  <span>Custom Pricing</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>Custom Retention</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-              </div>
-              <Divider isDashed />
-              <div
-                className={`${styles.deploymentOptions} ${styles.packageDetailBlock}`}
-              >
-                <h4 className={styles.packageDetailTitle}>
-                  Deployment Options
-                </h4>
-                <div>
-                  <span>SaaS</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>Managed by SigNoz in your cloud</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-              </div>
-              <Divider isDashed />
-              <div className={`${styles.support} ${styles.packageDetailBlock}`}>
-                <h4 className={styles.packageDetailTitle}>Support</h4>
-                <div>
-                  <span>Email</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>Dedicated Slack Channel</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>Team Training</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>Dashboard Configuration Support</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>Instrumentation Support</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-                <div>
-                  <span>SLA w/ downtime developer pairing</span>
-                  <span>
-                    <RightSVG />
-                  </span>
-                </div>
-              </div>
-              <Divider isDashed />
-              <div className={styles.packageDetailBlock}>
-                <h4 className={styles.packageDetailTitle}>Features</h4>
-                <p className={styles.featureBlur}>
-                  Includes all features in Team
-                </p>
-                <ul className="list-icon-right">
-                  <li>Custom integration for metrics and logs</li>
-                  <li>AWS Private Link</li>
-                  <li>VPC Peering</li>
-                  <li>Security tightening for on-prem installation</li>
-                  <li>Monitor Health of SigNoz</li>
-                  <li>Query API Keys (access data from anywhere)</li>
-                </ul>
-              </div>
-              <Divider isDashed />
-              <div className={styles.packageDetailBlock}>
-                <h4 className={styles.packageDetailTitle}>Upcoming</h4>
-                <ul className="list-icon-right">
-                  <li>Finer RBAC with custom roles</li>
-                  <li>Audit Logs</li>
-                  <li>Custom retention for different sources of logs</li>
-                  <li>Multi-tenancy</li>
-                </ul>
-              </div>
-            </div>
-            <Divider isDashed />
-            <div className={`__card__footer ${styles.card__footer}`}>
-              <Link
-                id="btn-pricing-signoz-enterprise-2"
-                className={`button button--primary ${styles.pricingCtaBtn}`}
-                href={"/enterprise/"}
-              >
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </section>
   );
 };
 
-const ALL_FEATURES_DATA = {
-  HEADER: [
-    { heading: "", desc: "" },
-    { heading: "Community Edition", desc: "" },
-    { heading: "Teams", desc: "Cloud Only" },
-    {
-      heading: "Enterprise",
-      desc: "Cloud or Self Hosted or Managed by SigNoz in your Cloud",
-    },
-  ],
-  ROWS: [
-    {
-      section: "APM & Distributed Tracing",
-      features: [
-        {
-          feature: "Out of Box APM metrics",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Filtering and creating dashboards based on traces data",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Creating alerts based on traces data",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Unlimited dashboards & alerts from traces",
-          inCommunity: (
-            <div>
-              <CrossIcon />
-              <small>(Limited to 5 dashboard panels & alerts)</small>
-            </div>
-          ),
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-      ],
-    },
-    {
-      section: "Log Management",
-      features: [
-        {
-          feature: "Parsing logs via pipeline",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Create direct filters from JSON logs",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Saved Views for logs",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Unlimited dashboards & alerts for logs",
-          inCommunity: (
-            <div>
-              <CrossIcon />
-              <small>(Limited to 5 dashboard panels & alerts)</small>
-            </div>
-          ),
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-      ],
-    },
-    {
-      section: "Infrastructure Monitoring",
-      features: [
-        {
-          feature: "Out of the box dashboards for hostmetrics",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Kubernetes Monitoring",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-        {
-          feature: "Container Monitoring",
-          inCommunity: <RightIcon />,
-          inTeams: <RightIcon />,
-          inEnterprise: <RightIcon />,
-        },
-      ],
-    },
-    {
-      section: "Exceptions Monitoring",
-      features: [
-        {
-          feature: "Separate view of exceptions based on traced data",
-          inCommunity: <LoadingIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <LoadingIcon />,
-        },
-      ],
-    },
-    {
-      section: "Alerts Management",
-      features: [
-        {
-          feature: "Create alerts directly from dashboards",
-          inCommunity: <LoadingIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <LoadingIcon />,
-        },
-        {
-          feature: "Support for webhooks, slack and Pagerduty as channel",
-          inCommunity: <LoadingIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <LoadingIcon />,
-        },
-        {
-          feature: "MS Teams as alert channel",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <LoadingIcon />,
-        },
-      ],
-    },
-    {
-      section: "Data Pipelines",
-      features: [
-        {
-          feature: "Support for S3 archival",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <LoadingIcon />,
-        },
-        {
-          feature: "Service Dependency Visualization",
-          inCommunity: <LoadingIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <LoadingIcon />,
-        },
-        {
-          feature: "Overview of your application graph with health indication",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <LoadingIcon />,
-        },
-      ],
-    },
-    {
-      section: "Configuration",
-      features: [
-        {
-          feature: "SSO/SAML support",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>✅</div>,
-        },
-        {
-          feature: "Dashboard Locking & Access control",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>✅</div>,
-        },
-        {
-          feature: "Security tightening for on-premise installtion",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>Only in Enterprise Self Managed</div>,
-        },
-        {
-          feature: "Monitor Health of SigNoz",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>Only in Enterprise Self Managed</div>,
-        },
-        {
-          feature: "Finer RBAC with custom roles",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "AWS Private link",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>Only in Enterprise Cloud</div>,
-        },
-        {
-          feature: "Alert as code",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "Audit Logs",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "Custom retention for different sources of logs",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "Access Data in SigNoz from Anywhere (via API keys)",
-          inCommunity: <LoadingIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>✅</div>,
-        },
-        {
-          feature: "Multi-tenancy",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-      ],
-    },
-    {
-      section: "Support",
-      features: [
-        {
-          feature: "Community Support on Slack",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>Only in Enterprise Self Managed</div>,
-        },
-        {
-          feature: "Email Support",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "In product chat support",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>Only in Enterprise Cloud</div>,
-        },
-        {
-          feature: "Dedicated Slack Channel",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "Team Training",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "Dashboard Configuration Support",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-        {
-          feature: "Instrumentation Support",
-          inCommunity: <LoadingIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>✅</div>,
-        },
-        {
-          feature: "SLA w/ downtime developer pairing",
-          inCommunity: <CrossIcon />,
-          inTeams: <LoadingIcon />,
-          inEnterprise: <div>🔃 Coming soon</div>,
-        },
-      ],
-    },
-  ],
-};
-
 const ExploreAllFeature = () => {
   const [isOpened, setIsOpened] = useState(false);
+
+  const ALL_FEATURES_DATA = {
+    HEADER: [
+      { heading: "", desc: "" },
+      { heading: "Community Edition", desc: "" },
+      { heading: "Teams", desc: "Cloud Only" },
+      {
+        heading: "Enterprise",
+        desc: "Cloud or Self Hosted or Managed by SigNoz in your Cloud",
+      },
+    ],
+    ROWS: [
+      {
+        section: "APM & Distributed Tracing",
+        features: [
+          {
+            feature: "Out of Box APM metrics",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Filtering and creating dashboards based on traces data",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Creating alerts based on traces data",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Unlimited dashboards & alerts from traces",
+            inCommunity: (
+              <div className="flex flex-col justify-center items-center">
+                <CrossIcon />
+                <small>(Limited to 5 dashboard panels & alerts)</small>
+              </div>
+            ),
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+        ],
+      },
+      {
+        section: "Log Management",
+        features: [
+          {
+            feature: "Parsing logs via pipeline",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Create direct filters from JSON logs",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Saved Views for logs",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Unlimited dashboards & alerts for logs",
+            inCommunity: (
+              <div className="flex flex-col justify-center items-center">
+                <CrossIcon />
+                <small>(Limited to 5 dashboard panels & alerts)</small>
+              </div>
+            ),
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+        ],
+      },
+      {
+        section: "Infrastructure Monitoring",
+        features: [
+          {
+            feature: "Out of the box dashboards for hostmetrics",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Kubernetes Monitoring",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Container Monitoring",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+        ],
+      },
+      {
+        section: "Exceptions Monitoring",
+        features: [
+          {
+            feature: "Separate view of exceptions based on traced data",
+            inCommunity: <span>&mdash;</span>,
+            inTeams: <span>&mdash;</span>,
+            inEnterprise: <span>&mdash;</span>,
+          },
+        ],
+      },
+      {
+        section: "Alerts Management",
+        features: [
+          {
+            feature: "Create alerts directly from dashboards",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Support for webhooks, slack and Pagerduty as channel",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "MS Teams as alert channel",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+        ],
+      },
+      {
+        section: "Data Pipelines",
+        features: [
+          {
+            feature: "Support for S3 archival",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Service Dependency Visualization",
+            inCommunity: <span>&mdash;</span>,
+            inTeams: <span>&mdash;</span>,
+            inEnterprise: <span>&mdash;</span>,
+          },
+          {
+            feature:
+              "Overview of your application graph with health indication",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+        ],
+      },
+      {
+        section: "Configuration",
+        features: [
+          {
+            feature: "SSO/SAML support",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Dashboard Locking & Access control",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Security tightening for on-premise installtion",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: <div>Only in Enterprise Self Managed</div>,
+          },
+          {
+            feature: "Monitor Health of SigNoz",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: <div>Only in Enterprise Self Managed</div>,
+          },
+          {
+            feature: "Finer RBAC with custom roles",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: (
+              <div className="flex flex-col justify-center items-center">
+                <LoadingIcon />
+                <small>Coming soon</small>
+              </div>
+            ),
+          },
+          {
+            feature: "AWS Private link",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <div>Only in Enterprise Cloud</div>,
+          },
+          {
+            feature: "Alert as code",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: (
+              <div className="flex flex-col justify-center items-center">
+                <LoadingIcon />
+                <small>Coming soon</small>
+              </div>
+            ),
+          },
+          {
+            feature: "Audit Logs",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: (
+              <div className="flex flex-col justify-center items-center">
+                <LoadingIcon />
+                <small>Coming soon</small>
+              </div>
+            ),
+          },
+          {
+            feature: "Custom retention for different sources of logs",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: (
+              <div className="flex flex-col justify-center items-center">
+                <LoadingIcon />
+                <small>Coming soon</small>
+              </div>
+            ),
+          },
+          {
+            feature: "Access Data in SigNoz from Anywhere (via API keys)",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Multi-tenancy",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: (
+              <div className="flex flex-col justify-center items-center">
+                <LoadingIcon />
+                <small>Coming soon</small>
+              </div>
+            ),
+          },
+        ],
+      },
+      {
+        section: "Support",
+        features: [
+          {
+            feature: "Community Support on Slack",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Email Support",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "In product chat support",
+            inCommunity: <CrossIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Dedicated Slack Channel",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Team Training",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Dashboard Configuration Support",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "Instrumentation Support",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: <RightIcon />,
+          },
+          {
+            feature: "SLA w/ downtime developer pairing",
+            inCommunity: <CrossIcon />,
+            inTeams: <CrossIcon />,
+            inEnterprise: <RightIcon />,
+          },
+        ],
+      },
+    ],
+  };
 
   const Opacity = {
     1: "bg-opacity-10",
@@ -724,44 +1073,61 @@ const ExploreAllFeature = () => {
 
   return (
     <div>
-      <div className="flex justify-center my-5">
-        <div className="flex rounded-3xl">
-          <nav
-            className={`flex space-x-2 rounded-3xl ${styles.pricingTabContainer}`}
-          >
-            <button
-              type="button"
-              className={`rounded-3xl border-none px-6 py-4 cursor-pointer bg-primary-400 hover:bg-primary-500 flex flex-nowrap gap-2 text-md font-bold`}
-              onClick={() => setIsOpened(!isOpened)}
-            >
-              <span>Explore all Features</span>
-              <span className={isOpened ? "rotate-180" : ""}>
-                <Chevron />
-              </span>
-            </button>
-          </nav>
+      <div className="md:max-w-md lg:max-w-6xl mx-auto overflow-hidden">
+        <div className="mt-10">
+          <div className="ovc-table_top-wrapper grid grid-cols-4 gap-1">
+            {ALL_FEATURES_DATA.HEADER.map((h, idx) => {
+              return (
+                <div
+                  className={`${
+                    idx !== 0
+                      ? `rounded-tr-lg rounded-tl-lg p-2 bg-primary-400 ${Opacity[idx]}`
+                      : ""
+                  }`}
+                >
+                  <h2 className="m-0">{h.heading}</h2>
+                  <p>{h.desc}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
+      {!isOpened ? (
+        <div
+          className={`relative wavy-line mb-16
+        after:absolute after:content-[''] after:w-full after:h-0 after:top-[50%] after:bg-transparent
+      `}
+        >
+          <div
+            className={`flex justify-center my-5 relative
+            after:backdrop-blur-xl after:absolute after:content-[''] after:w-full after:h-20 after:bottom-[0] after:left-0 after:bg-[#1b1b1d] after:opacity-100 after:blur-xl  
+            before:backdrop-blur-xl before:absolute before:content-[''] before:w-full before:h-20 before:top-[0] before:left-0 before:bg-[#1b1b1d] before:opacity-100 before:blur-xl
+          `}
+          >
+            <div className="flex rounded-3xl z-[1]">
+              <nav
+                className={`flex space-x-2 rounded-3xl ${styles.pricingTabContainer}`}
+              >
+                <button
+                  type="button"
+                  className={`button button--primary flex flex-nowrap gap-2 text-md font-bold`}
+                  onClick={() => setIsOpened(!isOpened)}
+                >
+                  <span>Explore all Features</span>
+                  <span className={isOpened ? "rotate-180" : ""}>
+                    <Chevron />
+                  </span>
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      ) : null}
       {isOpened ? (
-        <div className="mx-auto max-w-4xl">
-          <div className="my-10">
+        <div className="md:max-w-md lg:max-w-6xl mx-auto">
+          <div className="mb-10">
             <div className="container-medium">
-              <div className="ovc-table_top-wrapper grid grid-cols-4 gap-1">
-                {ALL_FEATURES_DATA.HEADER.map((h, idx) => {
-                  return (
-                    <div
-                      className={`${
-                        idx !== 0
-                          ? `rounded-tr-lg rounded-tl-lg p-2 bg-primary-400 ${Opacity[idx]}`
-                          : ""
-                      }`}
-                    >
-                      <h2 className="m-0">{h.heading}</h2>
-                      <p>{h.desc}</p>
-                    </div>
-                  );
-                })}
-              </div>
               <div className="table-body">
                 {ALL_FEATURES_DATA.ROWS.map((row, i) => {
                   return (
@@ -830,6 +1196,34 @@ const ExploreAllFeature = () => {
           </div>
         </div>
       ) : null}
+      <div className="md:max-w-md lg:max-w-6xl mx-auto overflow-hidden">
+        {isOpened ? (
+          <div
+            className={`flex justify-center my-5 relative
+            after:backdrop-blur-xl after:absolute after:content-[''] after:w-screen after:h-40 after:bottom-[0] after:left-0 after:bg-[#1b1b1d] after:rounded-full after:opacity-50 after:blur-3xl  
+            before:backdrop-blur-xl before:absolute before:content-[''] before:w-screen before:h-40 before:top-[0] before:left-0 before:bg-[#1b1b1d] before:rounded-full before:opacity-50 before:blur-3xl
+          `}
+          >
+            <div className="flex rounded-3xl z-10">
+              <nav
+                className={`flex space-x-2 rounded-3xl ${styles.pricingTabContainer}`}
+              >
+                <button
+                  type="button"
+                  className={`button button--primary flex flex-nowrap gap-2 text-md font-bold`}
+                  onClick={() => setIsOpened(!isOpened)}
+                >
+                  <span>Explore all Features</span>
+                  <span className={isOpened ? "rotate-180" : ""}>
+                    <Chevron />
+                  </span>
+                </button>
+              </nav>
+            </div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
+
