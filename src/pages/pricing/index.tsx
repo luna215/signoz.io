@@ -187,7 +187,24 @@ const PricingPlans = () => {
             </nav>
           </div>
         </div>
-        <div className="flex flex-col items-center mb-5 text-center mx-auto max-w-4xl">
+        {/* <div className="flex flex-col items-center mb-5 text-center mx-auto max-w-4xl">
+          <Heading type={1}>
+            Transparent & Predictable Pricing for{" "}
+            {tab === "cloud" ? "Cloud" : "Self Managed"}
+          </Heading>
+          <SubHeading>
+            Tired of unpredictable pricing and complex billing structure? Save
+            up to{" "}
+            <Link href="/blog/pricing-comparison-signoz-vs-datadog-vs-newrelic-vs-grafana/">
+              <u>90% on your Datadog bill</u>
+            </Link>{" "}
+            with SigNoz. No user-based and host-based pricing.
+          </SubHeading>
+        </div> */}
+        {tab === "cloud" ? (
+          <>
+            {/* Cloud Plan */}
+          <div className="flex flex-col items-center mb-5 text-center mx-auto max-w-4xl">
           <Heading type={1}>
             Transparent & Predictable Pricing for{" "}
             {tab === "cloud" ? "Cloud" : "Self Managed"}
@@ -201,9 +218,6 @@ const PricingPlans = () => {
             with SigNoz. No user-based and host-based pricing.
           </SubHeading>
         </div>
-        {tab === "cloud" ? (
-          <>
-            {/* Cloud Plan */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-8 md:max-w-md lg:max-w-6xl mx-auto justify-center pricing-plans">
               <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
                 <div>
@@ -342,7 +356,7 @@ const PricingPlans = () => {
                   </div>
                   <Divider isDashed />
                   <p className={styles.retention}>
-                    Retention: 15 days for Traces & Logs, 30 days for Metrics
+                    Default Retention: 15 days for Traces & Logs, 30 days for Metrics
                   </p>
                   <Divider isDashed />
                   <div
@@ -407,7 +421,7 @@ const PricingPlans = () => {
                     </ul>
                   </div>
                 </div>
-                <Divider isDashed />
+                {/* <Divider isDashed /> */}
                 <div className={`__card__footer ${styles.card__footer}`}>
                   <Link
                     id="btn-pricing-signoz-cloud-2"
@@ -416,6 +430,7 @@ const PricingPlans = () => {
                   >
                     Get started - free
                   </Link>
+                  <div><br></br></div>
                 </div>
               </div>
               <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
@@ -565,6 +580,17 @@ const PricingPlans = () => {
         ) : (
           <>
             {/* Self Managed Plan */}
+
+            <div className="flex flex-col items-center mb-5 text-center mx-auto max-w-4xl">
+          <Heading type={1}>
+          Run SigNoz within your infrastructure
+          </Heading>
+          <SubHeading>
+            Get started with Community Edition and upgrade for enterprise-ready features or BYOC (Bring your own Cloud).
+
+          </SubHeading>
+        </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-10 gap-x-8 md:max-w-md lg:max-w-6xl mx-auto justify-center pricing-plans">
               <div className="px-8 py-5 pricing-card bg-primary-400 bg-opacity-5">
                 <div>
@@ -574,15 +600,15 @@ const PricingPlans = () => {
                   </p>
                   <div className="flex justify-between items-center">
                     <p className="m-0">
-                      Some Link
+                      Install in your infra
                     </p>
                     <div>
                       <Link
                         id="btn-pricing-signoz-cloud-1"
                         className={`button button--primary ${styles.pricingCtaBtn}`}
-                        href={"/teams/"}
+                        href={"/docs/install/"}
                       >
-                        TODO:SOME-LINK:Get started - free
+                      Documentation
                       </Link>
                     </div>
                   </div>
@@ -618,9 +644,9 @@ const PricingPlans = () => {
                   <Link
                     id="btn-pricing-signoz-cloud-2"
                     className={`button button--primary ${styles.pricingCtaBtn}`}
-                    href={"/teams/"}
+                    href={"/docs/install/"}
                   >
-                    TODO:SOME-LINKGet started - free
+                  Documentation
                   </Link>
                 </div>
               </div>
@@ -654,7 +680,13 @@ const PricingPlans = () => {
                       Deployment Options
                     </h4>
                     <div>
-                      <span>Self Host with support contract by SigNoz team <span className="line-through">Managed by SigNoz in your cloud</span></span>
+                      <span>Self Host with support contract by SigNoz team </span>
+                      <span>
+                        <RightSVG />
+                      </span>
+                    </div>
+                    <div>
+                      <span>Managed by SigNoz in your cloud</span>
                       <span>
                         <RightSVG />
                       </span>
@@ -738,7 +770,7 @@ const PricingPlans = () => {
                     className={`button button--primary ${styles.pricingCtaBtn}`}
                     href={"/enterprise/"}
                   >
-                    TODO:SOME-LINK:Contact Us
+                    Contact Us
                   </Link>
                 </div>
               </div>
@@ -790,7 +822,7 @@ const ExploreAllFeature = () => {
             inCommunity: (
               <div className="flex flex-col justify-center items-center">
                 <CrossIcon />
-                <small>(Limited to 5 dashboard panels & alerts)</small>
+                {/* <small>(Limited to 5 dashboard panels & alerts)</small> */}
               </div>
             ),
             inTeams: <RightIcon />,
@@ -824,7 +856,7 @@ const ExploreAllFeature = () => {
             inCommunity: (
               <div className="flex flex-col justify-center items-center">
                 <CrossIcon />
-                <small>(Limited to 5 dashboard panels & alerts)</small>
+                {/* <small>(Limited to 5 dashboard panels & alerts)</small> */}
               </div>
             ),
             inTeams: <RightIcon />,
@@ -859,10 +891,10 @@ const ExploreAllFeature = () => {
         section: "Exceptions Monitoring",
         features: [
           {
-            feature: "Separate view of exceptions based on traced data",
-            inCommunity: <span>&mdash;</span>,
-            inTeams: <span>&mdash;</span>,
-            inEnterprise: <span>&mdash;</span>,
+            feature: "Separate view of exceptions based on Trace data",
+            inCommunity: <RightIcon />,
+            inTeams: <RightIcon />,
+            inEnterprise: <RightIcon />,
           },
         ],
       },
@@ -876,7 +908,7 @@ const ExploreAllFeature = () => {
             inEnterprise: <RightIcon />,
           },
           {
-            feature: "Support for webhooks, slack and Pagerduty as channel",
+            feature: "Support for Slack, Pagerduty, OpsGenie & webhooks as alert channel",
             inCommunity: <RightIcon />,
             inTeams: <RightIcon />,
             inEnterprise: <RightIcon />,
@@ -893,17 +925,17 @@ const ExploreAllFeature = () => {
         section: "Data Pipelines",
         features: [
           {
-            feature: "Support for S3 archival",
+            feature: "Support for S3/Google Cloud Storage archival",
             inCommunity: <CrossIcon />,
-            inTeams: <RightIcon />,
+            inTeams: <CrossIcon />,
             inEnterprise: <RightIcon />,
           },
-          {
-            feature: "Service Dependency Visualization",
-            inCommunity: <span>&mdash;</span>,
-            inTeams: <span>&mdash;</span>,
-            inEnterprise: <span>&mdash;</span>,
-          },
+        ],
+       },         
+       
+       {
+        section: "Service Dependency Visualization",
+        features: [
           {
             feature:
               "Overview of your application graph with health indication",
@@ -954,7 +986,7 @@ const ExploreAllFeature = () => {
           {
             feature: "AWS Private link",
             inCommunity: <CrossIcon />,
-            inTeams: <RightIcon />,
+            inTeams: <CrossIcon />,
             inEnterprise: <div>Only in Enterprise Cloud</div>,
           },
           {
