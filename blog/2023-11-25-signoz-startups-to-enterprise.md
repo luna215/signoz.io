@@ -5,7 +5,7 @@ date: 2023-11-25
 tags: [observability, OpenTelemetry]
 authors: pranay
 description: When you think about observability? Do you just think of it as an insurance? Or do you think of it as a growth driver? In this article, we will discuss how observability can be a growth driver for your business.
-image: /img/blog/2023/11/insurance-growth.jpg
+image: /img/blog/2023/11/complete-journey.webp
 hide_table_of_contents: true
 keywords:
   - opentelemetry
@@ -26,7 +26,7 @@ Working with many customers and users trying to get better at Observability, the
 
 <!--truncate-->
 
-![Cover Image](/img/blog/2023/11/insurance-growth.webp)
+![Cover Image](/img/blog/2023/11/complete-journey.webp)
 
 
 Observability is a crucial component of a startup's journey, evolving in importance and complexity as the company grows. Understanding this evolution is key to implementing the right solutions at the right time
@@ -114,6 +114,13 @@ At this stage they typically have an in-house devops/platform  team of at leats 
 Or use enterprise hosted plans by us with advanced features like AWS private link, access data via APIs, have advanced integration like LDAP, SAML, etc.
 
 <!-- <Image showing features of SigNoz helpful at different stage of the company> -->
+
+<figure data-zoomable align='center'>
+    <img className="box-shadowed-image" src="/img/blog/2023/11/SigNoz-Complete.webp" alt="p99 latency"/>
+    <figcaption><i>SigNoz at different stages of the company</i></figcaption>
+</figure>
+<br></br>
+<br></br>
 
 ### Importance of OpenTelemetry
 
