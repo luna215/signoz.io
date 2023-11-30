@@ -1,5 +1,5 @@
 ---
-title: SigNoz - Serving the complete journey from 2 ppl startups to big enterprises
+title: An observability tool for all stages - From early stage startups to big enterprises
 slug: signoz-startups-to-enterprise
 date: 2023-11-25
 tags: [observability, OpenTelemetry]
@@ -20,22 +20,18 @@ keywords:
 </head>
 
 
-When you think about observability? Do you just think of it as an insurance? Or do you think it can also drive growth for the business?
+Observability is a crucial component of a startup's journey, evolving in importance and complexity as the company grows. Understanding this evolution is key to implementing the right solutions at the right time
 
-Working with many customers and users trying to get better at Observability, there are two mindsets I see:
+Observability journey of companies typically takes this route:
 
 <!--truncate-->
 
 ![Cover Image](/img/blog/2023/11/complete-journey.webp)
 
 
-Observability is a crucial component of a startup's journey, evolving in importance and complexity as the company grows. Understanding this evolution is key to implementing the right solutions at the right time
-
-Observability journey of companies typically takes this route:
-
 When a company is just founded with 2 co-founders, observability is not a concern. They just want to get a product out and validate the idea with customers. In the initial days the idea is just to find Product Market Fit
 
-If there is product market fit, and that’s a big IF ( and many startups die before that) - it’s likely that they have a customer who is using the product. Typically if you are a SaaS startup which is hosting some application and providing it a service to users - you need to guarantee some uptime. As users are relying on your product and it’s your job to maintain it’s reliability and availability - you need to have some way to understand how your application is running, are the customers accessing it seeing if load fast ( or what’s the latency they are seeing)
+If there is product market fit, and that’s a big IF (and many startups die before that) - it’s likely that they have a customer who is using the product. Typically if you are a SaaS startup which is hosting some application and providing it a service to users - you need to guarantee some uptime. As users are relying on your product and it’s your job to maintain it’s reliability and availability - you need to have some way to understand how your application is running, are the customers accessing it seeing if load fast ( or what’s the latency they are seeing)
 
 ### Early PMF
 
@@ -58,11 +54,20 @@ At this stage, you can just use the community edition of SigNoz and self host it
 - Since, the scale won’t be very high, you can easily manage it in a self hosted instance
 - You will start with OpenTelemetry which is a good standard to adopt for future proofness.
 
+
+<figure data-zoomable align='center'>
+    <img className="box-shadowed-image" src="/img/blog/2023/11/complete-lifecycle.webp" alt="Complete Lifecycle"/>
+    <figcaption><i>SigNoz at different stages of the company</i></figcaption>
+</figure>
+<br></br>
+<br></br>
+
 Some may say that you don’t need to worry about future proofness at this stage.
 
 But interestingly, we are seeing even early stage cos which have good tech teams start with OTEL as they know how closed source vendors can be a problem for them later and everyone has heard these [horror stories](https://news.ycombinator.com/item?id=35837330) or have got burnt by them.
 
-- Why OTEL even makes sense for early stage startups
+
+Starting with OpenTelemetry provides companies with a easy glide path on adding more signals like metrics and traces later. And also makes it easier to switch to other vendors later if they want to.
 
 ### Scaling 
 *(10+ ppl companies)*
@@ -115,18 +120,28 @@ Or use enterprise hosted plans by us with advanced features like AWS private lin
 
 <!-- <Image showing features of SigNoz helpful at different stage of the company> -->
 
-<figure data-zoomable align='center'>
+<!-- <figure data-zoomable align='center'>
     <img className="box-shadowed-image" src="/img/blog/2023/11/SigNoz-Complete.webp" alt="p99 latency"/>
     <figcaption><i>SigNoz at different stages of the company</i></figcaption>
 </figure>
 <br></br>
-<br></br>
+<br></br> -->
+
+
 
 ### Importance of OpenTelemetry
 
 - Adopting OpenTelemetry even in early stages sets the right foundation which is future proof, and vendor agnostic -so that you don’t get vendor locked-in to a particular vendor
-- Adding more signals becomes easy as it has support for metrics, traces & logs - and new signals are being added ( like profiling PR link)  which has an active community around it (2nd after k8s, different vendors work together, etc) - Show some examples of OpenTelemetry being an active community
-- SigNoz being otel native (link to Otel DD/NR article)
+- Adding more signals becomes easy as it has support for metrics, traces & logs - and new signals are being added ( like [Profiling](https://github.com/open-telemetry/oteps/pull/212)) 
+- Advantage of leveraging a rich ecosystems of tooling being built on top of OpenTelemetry like tools to enable [integration testing](https://signoz.io/blog/signoz-tracetest-opentelemetry-native-observability-meets-testing/) from OpenTelemetry traces.
+- OpenTelemetry is a CNCF project, and has a lot of momentum behind it. It’s the future of observability and is currently the 2nd most active CNCF project after Kubernetes. So, it’s a safe bet to adopt it.
+
+
+We believe that OpenTelemetry is the future of observability and hence at SigNoz we are natively built on OpenTelemtry from Day 1. This makes us much more feature rich for Otel and default support for OpenTelemetry semantic conventions. Other propertiary sometimes support for OpenTelemetry as an afterthought and hence are [not as feature rich](https://signoz.io/blog/is-opentelemetry-a-first-class-citizen-in-your-dashboard-a-datadog-and-newrelic-comparison/) as SigNoz.
+
+
+### Conclusion
+
 ---
 
 ## Further Reading
